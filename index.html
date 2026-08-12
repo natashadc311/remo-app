@@ -2952,13 +2952,34 @@ if (!window.storage) {
     const strokeColor = darken(color.hex, 40);
     oarL.setAttribute('stroke', color.hex);
     oarR.setAttribute('stroke', color.hex);
-    let bladeSvg = shape.blade(color.hex, strokeColor);
-    if (isPremium || devUnlockAll) bladeSvg += premiumOarDetailSvg();
-    oarBladeL.innerHTML = bladeSvg;
-    oarBladeR.innerHTML = bladeSvg;
-    const previewL = document.getElementById('previewOarL'), previewR = document.getElementById('previewOarR');
-    if (previewL) { previewL.setAttribute('transform', 'translate(60,300) rotate(180) scale(1.8)'); previewL.innerHTML = bladeSvg; }
-    if (previewR) { previewR.setAttribute('transform', 'translate(440,300) rotate(0) scale(1.8)'); previewR.innerHTML = bladeSvg; }
+
+    const applyBlades = (svgL, svgR) => {
+      if (isPremium || devUnlockAll) { svgL += premiumOarDetailSvg(); svgR += premiumOarDetailSvg(); }
+      oarBladeL.innerHTML = svgL;
+      oarBladeR.innerHTML = svgR;
+      const previewL = document.getElementById('previewOarL'), previewR = document.getElementById('previewOarR');
+      if (previewL) { previewL.setAttribute('transform', 'translate(60,300) rotate(180) scale(1.8)'); previewL.innerHTML = svgL; }
+      if (previewR) { previewR.setAttribute('transform', 'translate(440,300) rotate(0) scale(1.8)'); previewR.innerHTML = svgR; }
+    };
+
+    const imgPath = `images/oars/${shape.id}.png`;
+    const probe = new Image();
+    probe.onload = () => {
+      const makeFilter = id => `<defs><filter id="${id}" color-interpolation-filters="sRGB">
+        <feColorMatrix type="luminanceToAlpha" result="a"/>
+        <feFlood flood-color="${color.hex}" result="clr"/>
+        <feComposite in="clr" in2="a" operator="in"/>
+      </filter></defs>`;
+      const makeImg = id =>
+        `<image href="${imgPath}" x="-5" y="-10" width="40" height="20" filter="url(#${id})"/>`;
+      applyBlades(makeFilter('oarBFL') + makeImg('oarBFL'),
+                  makeFilter('oarBFR') + makeImg('oarBFR'));
+    };
+    probe.onerror = () => {
+      const svg = shape.blade(color.hex, strokeColor);
+      applyBlades(svg, svg);
+    };
+    probe.src = imgPath;
   }
 
   async function storageSetWithRetry(key, value, shared, attempts) {
