@@ -2971,7 +2971,7 @@ if (!window.storage) {
         <feComposite in="clr" in2="a" operator="in"/>
       </filter></defs>`;
       const makeImg = id =>
-        `<image href="${imgPath}" x="-5" y="-10" width="40" height="20" filter="url(#${id})"/>`;
+        `<image href="${imgPath}" x="-8" y="-20" width="65" height="40" filter="url(#${id})"/>`;
       applyBlades(makeFilter('oarBFL') + makeImg('oarBFL'),
                   makeFilter('oarBFR') + makeImg('oarBFR'));
     };
