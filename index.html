@@ -2315,9 +2315,21 @@ function setLang(l) {
     clearTimeout(spmToastTimeout);
     spmToastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
   }
+  function updateSegmentImage(routeId, segIdx) {
+    const imageEl = document.getElementById('bgPremiumImage');
+    if (!imageEl || imageEl.getAttribute('opacity') !== '1') return;
+    const segUrl = `images/routes/${routeId}_${segIdx}.png`;
+    imageEl.onerror = () => {
+      imageEl.onerror = null;
+      imageEl.setAttribute('href', `images/routes/${routeId}.png`);
+    };
+    imageEl.setAttribute('href', segUrl);
+  }
+
   function applySegment(seg) {
     if (seg.spm !== spm) showSpmChangeToast(seg.spm, spm);
     spm = seg.spm; setSceneTheme(seg.theme);
+    updateSegmentImage(selectedRoute.id, currentSegIndex);
   }
 
   // ---------- MINIMUM-TIME SAVE SYSTEM ----------
