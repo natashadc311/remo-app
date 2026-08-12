@@ -547,6 +547,9 @@
       </radialGradient>
       <clipPath id="waterClip"><rect x="0" y="190" width="500" height="130"/></clipPath>
       <filter id="reflBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+      <filter id="handSkinFilter" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.9098  0 0 0 0 0.7059  0 0 0 0 0.5412  0.299 0.587 0.114 0 0"/>
+      </filter>
     </defs>
 
     <!-- Sky -->
@@ -641,22 +644,14 @@
       <path id="forearmL" fill="#e8b48a" d="M 0 0"/>
       <path id="forearmR" fill="#e8b48a" d="M 0 0"/>
 
-      <!-- hands: dorsal fist — rectangular palm + 4-knuckle arch + inter-knuckle creases -->
+      <!-- hands: image-based fist (left is mirrored) -->
       <g id="handL">
-        <rect x="-15" y="-2" width="30" height="11" rx="5" fill="#e8b48a" stroke="#c98f60" stroke-width="1.5"/>
-        <path d="M -15 -2 Q -12 -9 -9 -11 Q -5.5 -7.5 -2 -11 Q 1.5 -7.5 5 -11 Q 8 -7.5 11 -10 Q 13.5 -6 15 -2 Z"
-              fill="#e8b48a" stroke="#c98f60" stroke-width="1.5"/>
-        <line x1="-5.5" y1="-7.5" x2="-5.5" y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-        <line x1="1.5"  y1="-7.5" x2="1.5"  y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-        <line x1="8"    y1="-7.5" x2="8"    y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+        <g transform="scale(-1,1)">
+          <image href="images/hands/hands.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
+        </g>
       </g>
       <g id="handR">
-        <rect x="-15" y="-2" width="30" height="11" rx="5" fill="#e8b48a" stroke="#c98f60" stroke-width="1.5"/>
-        <path d="M -15 -2 Q -12 -9 -9 -11 Q -5.5 -7.5 -2 -11 Q 1.5 -7.5 5 -11 Q 8 -7.5 11 -10 Q 13.5 -6 15 -2 Z"
-              fill="#e8b48a" stroke="#c98f60" stroke-width="1.5"/>
-        <line x1="-5.5" y1="-7.5" x2="-5.5" y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-        <line x1="1.5"  y1="-7.5" x2="1.5"  y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-        <line x1="8"    y1="-7.5" x2="8"    y2="-2" stroke="#c98f60" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+        <image href="images/hands/hands.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
       </g>
     </g>
   </svg>
@@ -2875,6 +2870,16 @@ if (!window.storage) {
 
   function applySkinColor(color) {
     skinColor = color;
+    const num = parseInt(color.slice(1), 16);
+    const r = ((num >> 16) / 255).toFixed(4);
+    const g = (((num >> 8) & 0xff) / 255).toFixed(4);
+    const b = ((num & 0xff) / 255).toFixed(4);
+    const skinFilterMatrix = document.querySelector('#handSkinFilter feColorMatrix');
+    if (skinFilterMatrix) {
+      skinFilterMatrix.setAttribute('values', `0 0 0 0 ${r}  0 0 0 0 ${g}  0 0 0 0 ${b}  0.299 0.587 0.114 0 0`);
+    }
+    forearmL.setAttribute('fill', color);
+    forearmR.setAttribute('fill', color);
     const strokeColor = darken(color, 35);
     [handL, handR].forEach(hand => {
       hand.querySelectorAll('rect, path').forEach(el => {
@@ -2912,16 +2917,29 @@ if (!window.storage) {
     const probe = new Image();
     probe.onload = () => {
       const num = parseInt(color.hex.slice(1), 16);
-      const r = ((num >> 16) / 255).toFixed(4);
-      const g = (((num >> 8) & 0xff) / 255).toFixed(4);
-      const b = ((num & 0xff) / 255).toFixed(4);
-      const svg = `<defs><filter id="boatColorFilter">
-        <feColorMatrix type="matrix" values="${r} 0 0 0 0  0 ${g} 0 0 0  0 0 ${b} 0 0  0 0 0 1 0"/>
-      </filter></defs>
-      <image href="${imgPath}" x="0" y="0" width="500" height="320" filter="url(#boatColorFilter)" preserveAspectRatio="none"/>`;
-      document.getElementById('boatHullGroup').innerHTML = svg;
+      const r = (num >> 16) / 255;
+      const g = ((num >> 8) & 0xff) / 255;
+      const b = (num & 0xff) / 255;
+      // luminance-to-color: strip original hues, tint by luminance
+      const Lr = 0.299, Lg = 0.587, Lb = 0.114;
+      const f = v => (v).toFixed(4);
+      const fmx = `${f(Lr*r)} ${f(Lg*r)} ${f(Lb*r)} 0 0  ${f(Lr*g)} ${f(Lg*g)} ${f(Lb*g)} 0 0  ${f(Lr*b)} ${f(Lg*b)} ${f(Lb*b)} 0 0  0 0 0 1 0`;
+      // boost contrast first: dark pixels→black, bright pixels→white, then tint by luminance
+      const filterBody = `
+        <feComponentTransfer result="c">
+          <feFuncR type="linear" slope="2.5" intercept="-0.6"/>
+          <feFuncG type="linear" slope="2.5" intercept="-0.6"/>
+          <feFuncB type="linear" slope="2.5" intercept="-0.6"/>
+        </feComponentTransfer>
+        <feColorMatrix in="c" type="matrix" values="${fmx}"/>`;
+      const filterAttr = 'color-interpolation-filters="sRGB"';
+      document.getElementById('boatHullGroup').innerHTML =
+        `<defs><filter id="boatColorFilter" ${filterAttr}>${filterBody}</filter></defs>
+         <image href="${imgPath}" x="0" y="0" width="500" height="320" filter="url(#boatColorFilter)" preserveAspectRatio="none"/>`;
       const preview = document.getElementById('previewBoatHull');
-      if (preview) preview.innerHTML = svg;
+      if (preview) preview.innerHTML =
+        `<defs><filter id="boatColorFilterPrev" ${filterAttr}>${filterBody}</filter></defs>
+         <image href="${imgPath}" x="0" y="0" width="500" height="320" filter="url(#boatColorFilterPrev)" preserveAspectRatio="none"/>`;
     };
     probe.onerror = fallback;
     probe.src = imgPath;
