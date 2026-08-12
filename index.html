@@ -533,13 +533,15 @@
 
 <h1><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:5px;"><path d="M12 3v18"/><path d="M7 8l5-3 5 3"/><path d="M4 17c3 2 13 2 16 0"/></svg>Metrónomo de Remo</h1>
 
+<button id="langToggleBtn" onclick="setLang(lang==='es'?'en':'es')" style="position:fixed;top:8px;right:10px;z-index:100;background:rgba(255,255,255,0.92);border:1px solid #eceef1;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:#4b5563;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);">EN</button>
+
 <div class="tabs">
-  <button id="tabHome" class="active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h5v-5h2v5h5v-9"/></svg>Inicio</button>
-  <button id="tabFree"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>Libre</button>
-  <button id="tabRoutine"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><circle cx="5" cy="18" r="1.8" fill="currentColor" stroke="none"/><circle cx="19" cy="6" r="1.8" fill="currentColor" stroke="none"/><path d="M5 18c8 0 4-11 14-12"/></svg>Rutas</button>
-  <button id="tabMyRoutines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Mías</button>
-  <button id="tabProgress"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>Progreso</button>
-  <button id="tabCustom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="14" cy="6" r="2"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="8" cy="12" r="2"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="16" cy="18" r="2"/></svg>Estilo</button>
+  <button id="tabHome" class="active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h5v-5h2v5h5v-9"/></svg><span data-i18n="nav_home">Inicio</span></button>
+  <button id="tabFree"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg><span data-i18n="nav_free">Libre</span></button>
+  <button id="tabRoutine"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><circle cx="5" cy="18" r="1.8" fill="currentColor" stroke="none"/><circle cx="19" cy="6" r="1.8" fill="currentColor" stroke="none"/><path d="M5 18c8 0 4-11 14-12"/></svg><span data-i18n="nav_routes">Rutas</span></button>
+  <button id="tabMyRoutines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span data-i18n="nav_my">Mías</span></button>
+  <button id="tabProgress"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span data-i18n="nav_progress">Progreso</span></button>
+  <button id="tabCustom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="14" cy="6" r="2"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="8" cy="12" r="2"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="16" cy="18" r="2"/></svg><span data-i18n="nav_style">Estilo</span></button>
   <button id="tabPremium"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><circle cx="12" cy="8" r="5"/><path d="M8.3 12.6 6.8 21l5.2-3 5.2 3-1.5-8.4"/></svg>Premium</button>
 </div>
 
@@ -714,7 +716,7 @@
 
 <div class="controls hidden" id="freePanel">
   <div class="row">
-    <span class="label">Ritmo</span>
+    <span class="label" data-i18n="label_pace">Ritmo</span>
     <div class="spm-display" id="spmDisplay">22</div>
     <span class="label" style="text-align:right;">spm</span>
   </div>
@@ -724,7 +726,7 @@
     <div class="stepper"><button id="plus">+</button></div>
   </div>
   <div class="row">
-    <span class="label">Relación</span>
+    <span class="label" data-i18n="label_ratio">Relación</span>
     <div class="ratio-buttons" id="ratioButtons">
       <button data-ratio="1.5">1:1.5</button>
       <button data-ratio="2" class="active">1:2</button>
@@ -732,10 +734,10 @@
     </div>
   </div>
   <div class="row">
-    <span class="label">Sonido</span>
+    <span class="label" data-i18n="label_sound">Sonido</span>
     <div class="sound-toggle">
       <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider-toggle"></span></label>
-      <span>clic en cada catch</span>
+      <span data-i18n="sound_click_desc">clic en cada catch</span>
     </div>
   </div>
   <button class="play-btn" id="playBtn">▶ Empezar</button>
@@ -758,36 +760,36 @@
         <circle cx="32" cy="14" r="2.4" fill="var(--accent-deep)"/>
       </svg>
     </div>
-    <div class="home-hero-title">Entrena tu cadencia de remo indoor como un profesional</div>
-    <div class="home-hero-sub">Un metrónomo inteligente que convierte cada sesión en un entrenamiento guiado.</div>
-    <button class="play-btn" id="homeStartBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white" style="vertical-align:-3px; margin-right:6px;"><path d="M6 4l14 8-14 8V4z"/></svg>Empezar entrenamiento</button>
-    <button class="home-secondary-btn" id="homeExploreBtn">Explorar funciones</button>
+    <div class="home-hero-title" data-i18n="hero_title">Entrena tu cadencia de remo indoor como un profesional</div>
+    <div class="home-hero-sub" data-i18n="hero_sub">Un metrónomo inteligente que convierte cada sesión en un entrenamiento guiado.</div>
+    <button class="play-btn" id="homeStartBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white" style="vertical-align:-3px; margin-right:6px;"><path d="M6 4l14 8-14 8V4z"/></svg><span data-i18n="btn_start_training">Empezar entrenamiento</span></button>
+    <button class="home-secondary-btn" id="homeExploreBtn" data-i18n="btn_explore">Explorar funciones</button>
   </div>
 
-  <div class="home-section-title" id="homeBenefitsAnchor">Por qué esta app</div>
+  <div class="home-section-title" id="homeBenefitsAnchor" data-i18n="section_why">Por qué esta app</div>
   <div class="home-benefits">
     <div class="home-benefit-card">
       <div class="hb-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div>
-      <div><div class="hb-title">Mantén la cadencia perfecta</div><div class="hb-desc">Metrónomo visual y sonoro sincronizado con tu remada real: catch, impulso y recuperación.</div></div>
+      <div><div class="hb-title" data-i18n="why1_title">Mantén la cadencia perfecta</div><div class="hb-desc" data-i18n="why1_desc">Metrónomo visual y sonoro sincronizado con tu remada real: catch, impulso y recuperación.</div></div>
     </div>
     <div class="home-benefit-card">
       <div class="hb-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="1.8" fill="var(--accent-deep)" stroke="none"/><circle cx="19" cy="6" r="1.8" fill="var(--accent-deep)" stroke="none"/><path d="M5 18c8 0 4-11 14-12"/></svg></div>
-      <div><div class="hb-title">Entrena con rutas inmersivas</div><div class="hb-desc">Rema por 8 ríos del mundo, con el ritmo cambiando automáticamente por tramos.</div></div>
+      <div><div class="hb-title" data-i18n="why2_title">Entrena con rutas inmersivas</div><div class="hb-desc" data-i18n="why2_desc">Rema por 8 ríos del mundo, con el ritmo cambiando automáticamente por tramos.</div></div>
     </div>
     <div class="home-benefit-card">
       <div class="hb-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 4 4 7-9"/><path d="M15 6h5v5"/></svg></div>
-      <div><div class="hb-title">Analiza tu progreso</div><div class="hb-desc">Guarda distancia y calorías, y la app detecta cuándo bates tu propio récord.</div></div>
+      <div><div class="hb-title" data-i18n="why3_title">Analiza tu progreso</div><div class="hb-desc" data-i18n="why3_desc">Guarda distancia y calorías, y la app detecta cuándo bates tu propio récord.</div></div>
     </div>
   </div>
 
-  <div class="home-section-title">Cómo funciona</div>
+  <div class="home-section-title" data-i18n="section_how">Cómo funciona</div>
   <div class="home-steps">
-    <div class="home-step"><div class="hs-num">1</div><div class="hs-label">Configura</div><div class="hs-desc">Elige tu remo, tu bote y una ruta (o el metrónomo libre).</div></div>
-    <div class="home-step"><div class="hs-num">2</div><div class="hs-label">Rema</div><div class="hs-desc">Sigue el ritmo visual y sonoro en tiempo real.</div></div>
-    <div class="home-step"><div class="hs-num">3</div><div class="hs-label">Mejora</div><div class="hs-desc">Guarda la sesión y compara tu rendimiento.</div></div>
+    <div class="home-step"><div class="hs-num">1</div><div class="hs-label" data-i18n="step1_label">Configura</div><div class="hs-desc" data-i18n="step1_desc">Elige tu remo, tu bote y una ruta (o el metrónomo libre).</div></div>
+    <div class="home-step"><div class="hs-num">2</div><div class="hs-label" data-i18n="step2_label">Rema</div><div class="hs-desc" data-i18n="step2_desc">Sigue el ritmo visual y sonoro en tiempo real.</div></div>
+    <div class="home-step"><div class="hs-num">3</div><div class="hs-label" data-i18n="step3_label">Mejora</div><div class="hs-desc" data-i18n="step3_desc">Guarda la sesión y compara tu rendimiento.</div></div>
   </div>
 
-  <div class="home-section-title">Tu progreso</div>
+  <div class="home-section-title" data-i18n="section_progress">Tu progreso</div>
   <div id="homeStatsSection"></div>
 
   <button class="home-final-cta" id="homeFinalCtaBtn">Comienza tu primer entrenamiento</button>
@@ -795,21 +797,21 @@
 
 <div class="controls hidden" id="routinePanel">
   <div id="routineSelectUI">
-    <div class="row" style="margin-bottom:10px;"><span class="label" style="min-width:auto;">Elige una ruta:</span></div>
+    <div class="row" style="margin-bottom:10px;"><span class="label" style="min-width:auto;" data-i18n="choose_route">Elige una ruta:</span></div>
     <div class="route-list" id="routeList"></div>
     <div class="seg-preview" id="segPreview"></div>
 
     <div class="row" style="margin-top:16px; margin-bottom:8px;">
-      <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Clima / hora del día</span>
+      <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="weather_title">Clima / hora del día</span>
     </div>
     <div id="weatherPickerSection"></div>
 
     <div class="request-route-box" id="requestRouteBox">
-      <div class="rr-header" id="requestRouteToggle">¿Rápidos de algún sitio en concreto? Pide tu ruta</div>
+      <div class="rr-header" id="requestRouteToggle" data-i18n="request_route_toggle">¿Rápidos de algún sitio en concreto? Pide tu ruta</div>
       <div class="rr-form hidden" id="requestRouteForm">
-        <input type="text" id="requestRouteInput" placeholder="Ej. Los rápidos del río Futaleufú, Chile">
-        <button id="requestRouteSubmit">Enviar sugerencia</button>
-        <div class="rr-fineprint">Tu sugerencia se envía directamente por email para que la revisemos.</div>
+        <input type="text" id="requestRouteInput" placeholder="Ej. Los rápidos del río Futaleufú, Chile" data-i18n-placeholder="request_route_placeholder">
+        <button id="requestRouteSubmit" data-i18n="request_route_submit">Enviar sugerencia</button>
+        <div class="rr-fineprint" data-i18n="request_route_fine">Tu sugerencia se envía directamente por email para que la revisemos.</div>
       </div>
     </div>
   </div>
@@ -817,14 +819,14 @@
 
   <div id="routineExtraControls">
     <div class="row" style="margin-top:14px;">
-      <span class="label">Sonido</span>
+      <span class="label" data-i18n="label_sound">Sonido</span>
       <div class="sound-toggle">
         <label class="switch"><input type="checkbox" id="soundToggleR" checked><span class="slider-toggle"></span></label>
-        <span>Activado (tipo en Personalización)</span>
+        <span data-i18n="sound_route_label">Activado (tipo en Personalización)</span>
       </div>
     </div>
     <div class="row">
-      <span class="label">Relación</span>
+      <span class="label" data-i18n="label_ratio">Relación</span>
       <div class="ratio-buttons" id="ratioButtonsR">
         <button data-ratio="1.5">1:1.5</button>
         <button data-ratio="2" class="active">1:2</button>
@@ -833,7 +835,7 @@
     </div>
   </div>
   <button class="play-btn" id="playBtnR">▶ Empezar ruta</button>
-  <button class="restart-btn hidden" id="restartBtnR">↻ Reiniciar ruta</button>
+  <button class="restart-btn hidden" id="restartBtnR" data-i18n="btn_restart_route">↻ Reiniciar ruta</button>
   <button class="play-btn save-btn" id="manualSaveBtnRoutine" disabled>Rema 10:00 más para poder guardar</button>
   <div class="phase-label" id="phaseLabelR"></div>
 </div>
@@ -842,38 +844,38 @@
   <div id="progressLevelSection"></div>
 
   <div class="row" style="margin-top:4px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Objetivos semanales</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_weekly">Objetivos semanales</span>
   </div>
   <div id="weeklyGoalsSection"></div>
 
   <div class="row" style="margin-top:16px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Constancia</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_consistency">Constancia</span>
   </div>
   <div id="calendarHeatmapSection"></div>
 
   <div class="row" style="margin-top:16px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Comparado contigo mismo</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_vs_self">Comparado contigo mismo</span>
   </div>
   <div id="monthlyComparisonSection"></div>
 
   <div class="stats-grid" id="statsGrid"></div>
 
   <div class="row" style="margin-top:16px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Logros</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_achievements">Logros</span>
     <span class="label" style="min-width:auto;" id="achievementsCountLabel"></span>
   </div>
   <div id="achievementsGrid" class="achievements-grid"></div>
 
   <div class="row" style="margin-top:16px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Tus mejores marcas por ruta</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_bests">Tus mejores marcas por ruta</span>
   </div>
   <div id="personalBestsList" class="pb-list"></div>
 
   <div class="row" style="margin-top:16px; margin-bottom:8px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Historial de entrenamientos</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_history">Historial de entrenamientos</span>
   </div>
   <div id="historyList" class="history-list"></div>
-  <button class="play-btn" id="clearHistoryBtn" style="background:#f1f3f5; color:var(--muted); margin-top:14px;">Borrar historial</button>
+  <button class="play-btn" id="clearHistoryBtn" style="background:#f1f3f5; color:var(--muted); margin-top:14px;" data-i18n="btn_clear_history">Borrar historial</button>
 </div>
 
 <div class="controls hidden" id="customPanel">
@@ -887,37 +889,37 @@
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Tono de piel</div>
+    <div class="custom-section-title" data-i18n="section_skin">Tono de piel</div>
     <div class="skin-swatches" id="skinSwatches"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Forma del bote <span class="unlock-hint" id="boatShapeUnlockHint"></span></div>
+    <div class="custom-section-title"><span data-i18n="section_boat_shape">Forma del bote</span> <span class="unlock-hint" id="boatShapeUnlockHint"></span></div>
     <div class="item-gallery" id="boatShapeGallery"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Color del bote <span class="unlock-hint" id="boatColorUnlockHint"></span></div>
+    <div class="custom-section-title"><span data-i18n="section_boat_color">Color del bote</span> <span class="unlock-hint" id="boatColorUnlockHint"></span></div>
     <div class="item-gallery" id="boatColorGallery"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Forma del remo <span class="unlock-hint" id="oarShapeUnlockHint"></span></div>
+    <div class="custom-section-title"><span data-i18n="section_oar_shape">Forma del remo</span> <span class="unlock-hint" id="oarShapeUnlockHint"></span></div>
     <div class="item-gallery" id="oarShapeGallery"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Color del remo <span class="unlock-hint" id="oarColorUnlockHint"></span></div>
+    <div class="custom-section-title"><span data-i18n="section_oar_color">Color del remo</span> <span class="unlock-hint" id="oarColorUnlockHint"></span></div>
     <div class="item-gallery" id="oarColorGallery"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Sonido del remo</div>
+    <div class="custom-section-title" data-i18n="section_oar_sound">Sonido del remo</div>
     <div class="item-gallery" id="soundStyleGallery" style="grid-template-columns: 1fr 1fr;"></div>
   </div>
 
   <div class="custom-section">
-    <div class="custom-section-title">Modo de desarrollador</div>
+    <div class="custom-section-title" data-i18n="section_dev">Modo de desarrollador</div>
     <div class="sound-toggle" style="margin-bottom:10px;">
       <label class="switch"><input type="checkbox" id="testModeToggle"><span class="slider-toggle"></span></label>
       <span id="testModeLabel">Modo de prueba: guardar tras solo 15s (en vez de 10 min)</span>
@@ -931,7 +933,7 @@
 
 <div class="controls hidden" id="myRoutinesPanel">
   <div class="row" style="margin-bottom:10px;">
-    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);">Tus rutinas personalizadas</span>
+    <span class="label" style="min-width:auto; font-weight:700; color:var(--text);" data-i18n="section_my_routines">Tus rutinas personalizadas</span>
   </div>
   <div id="customRoutineSection"></div>
 </div>
@@ -945,19 +947,19 @@
 <!-- COMPLETION MODAL -->
 <div class="modal-overlay hidden" id="completionModal">
   <div class="modal-card">
-    <div class="modal-title">¡Buen entrenamiento!</div>
+    <div class="modal-title" data-i18n="modal_title">¡Buen entrenamiento!</div>
     <div class="modal-sub" id="modalSummary">—</div>
     <div class="modal-field">
-      <label>Distancia (km)</label>
+      <label data-i18n="modal_distance">Distancia (km)</label>
       <input type="number" id="inputDistance" step="0.1" min="0" placeholder="p. ej. 4.2">
     </div>
     <div class="modal-field">
-      <label>Calorías</label>
+      <label data-i18n="modal_calories">Calorías</label>
       <input type="number" id="inputCalories" step="1" min="0" placeholder="p. ej. 320">
     </div>
     <div class="modal-actions">
-      <button id="skipSaveBtn" class="modal-btn secondary">Omitir</button>
-      <button id="confirmSaveBtn" class="modal-btn primary">Guardar</button>
+      <button id="skipSaveBtn" class="modal-btn secondary" data-i18n="modal_skip">Omitir</button>
+      <button id="confirmSaveBtn" class="modal-btn primary" data-i18n="modal_save">Guardar</button>
     </div>
   </div>
 </div>
@@ -966,7 +968,7 @@
 <div class="modal-overlay hidden" id="workoutSummaryModal">
   <div class="modal-card summary-card">
     <div class="summary-header">
-      <div class="summary-title">¡Buen entrenamiento!</div>
+      <div class="summary-title" data-i18n="summary_title">¡Buen entrenamiento!</div>
       <div class="summary-xp-badge" id="summaryXpBadge">+0 XP</div>
     </div>
 
@@ -982,8 +984,8 @@
     <div id="summaryRecordRow"></div>
     <div id="summaryAchievementsBlock"></div>
 
-    <button class="modal-btn primary" id="summaryShareBtn" style="width:100%; margin-top:14px;">Compartir resultado</button>
-    <button class="modal-btn secondary" id="summaryCloseBtn" style="width:100%; margin-top:8px;">Cerrar</button>
+    <button class="modal-btn primary" id="summaryShareBtn" style="width:100%; margin-top:14px;" data-i18n="btn_share">Compartir resultado</button>
+    <button class="modal-btn secondary" id="summaryCloseBtn" style="width:100%; margin-top:8px;" data-i18n="btn_close">Cerrar</button>
   </div>
 </div>
 <script>
@@ -1017,6 +1019,257 @@ if (!window.storage) {
       return { keys, prefix, shared: !!shared };
     }
   };
+}
+
+// ---- i18n ----
+let lang = localStorage.getItem('remo_lang') || (navigator.language.startsWith('en') ? 'en' : 'es');
+let applyI18n;
+const T = {
+  es: {
+    nav_home:'Inicio', nav_free:'Libre', nav_routes:'Rutas', nav_my:'Mías', nav_progress:'Progreso', nav_style:'Estilo',
+    hero_title:'Entrena tu cadencia de remo indoor como un profesional',
+    hero_sub:'Un metrónomo inteligente que convierte cada sesión en un entrenamiento guiado.',
+    btn_start_training:'Empezar entrenamiento', btn_explore:'Explorar funciones',
+    section_why:'Por qué esta app',
+    why1_title:'Mantén la cadencia perfecta', why1_desc:'Metrónomo visual y sonoro sincronizado con tu remada real: catch, impulso y recuperación.',
+    why2_title:'Entrena con rutas inmersivas', why2_desc:'Rema por 8 ríos del mundo, con el ritmo cambiando automáticamente por tramos.',
+    why3_title:'Analiza tu progreso', why3_desc:'Guarda distancia y calorías, y la app detecta cuándo bates tu propio récord.',
+    section_how:'Cómo funciona',
+    step1_label:'Configura', step1_desc:'Elige tu remo, tu bote y una ruta (o el metrónomo libre).',
+    step2_label:'Rema', step2_desc:'Sigue el ritmo visual y sonoro en tiempo real.',
+    step3_label:'Mejora', step3_desc:'Guarda la sesión y compara tu rendimiento.',
+    section_progress:'Tu progreso',
+    btn_first_cta:'Comienza tu primer entrenamiento', btn_next_cta:'Empieza tu próximo entrenamiento',
+    no_sessions_yet:'Aún no has entrenado nada — dale a "Empezar entrenamiento" para tu primera sesión.',
+    stat_sessions:'Sesiones realizadas', stat_minutes:'Minutos remados', stat_best_streak:'Mejor racha (días)', stat_avg_spm:'Cadencia media (spm)',
+    label_pace:'Ritmo', label_ratio:'Relación', label_sound:'Sonido',
+    sound_click_desc:'clic en cada catch',
+    btn_start:'▶ Empezar', btn_pause:'⏸ Pausar', btn_resume:'▶ Reanudar',
+    btn_save_ready:'Guardar entrenamiento', btn_save_idle:'Rema 10:00 más para poder guardar',
+    choose_route:'Elige una ruta:', weather_title:'Clima / hora del día',
+    request_route_toggle:'¿Rápidos de algún sitio en concreto? Pide tu ruta',
+    request_route_placeholder:'Ej. Los rápidos del río Futaleufú, Chile',
+    request_route_submit:'Enviar sugerencia',
+    request_route_fine:'Tu sugerencia se envía directamente por email para que la revisemos.',
+    sound_route_label:'Activado (tipo en Personalización)',
+    btn_start_route:'▶ Empezar ruta', btn_restart_route:'↻ Reiniciar ruta', btn_resume_route:'▶ Reanudar',
+    btn_see_all_routes:'Ver todas las rutas', route_segments_label:'tramos',
+    diff_easy:'Fácil', diff_medium:'Medio', diff_hard:'Difícil', diff_extreme:'Extremo',
+    weather_day:'Día', weather_dawn:'Amanecer', weather_dusk:'Atardecer',
+    weather_locked_text:'Amanecer y atardecer para cada ruta',
+    weather_locked_sub:'Función Premium — cambia la luz y el ambiente de la escena',
+    section_weekly:'Objetivos semanales', section_consistency:'Constancia', section_vs_self:'Comparado contigo mismo',
+    section_achievements:'Logros', section_bests:'Tus mejores marcas por ruta',
+    section_history:'Historial de entrenamientos', btn_clear_history:'Borrar historial',
+    loading:'Cargando…', history_empty:'Aún no has guardado ningún entrenamiento. ¡Termina uno y regístralo aquí!',
+    bests_empty:'Aún no tienes marcas guardadas. Registra la distancia al terminar una ruta para empezar a comparar tu rendimiento.',
+    comparison_empty:'Entrena un par de meses para empezar a ver comparativas contigo mismo.',
+    history_load_error:'No se pudo cargar el historial.',
+    stat_workouts:'Entrenamientos', stat_total_minutes:'Minutos totales', stat_total_distance:'Distancia total', stat_total_calories:'Calorías totales',
+    weekly_minutes:'Minutos', weekly_distance:'Distancia', weekly_workouts:'Entrenamientos',
+    cal_less:'Menos', cal_more:'Más',
+    section_skin:'Tono de piel', section_boat_shape:'Forma del bote', section_boat_color:'Color del bote',
+    section_oar_shape:'Forma del remo', section_oar_color:'Color del remo', section_oar_sound:'Sonido del remo',
+    section_dev:'Modo de desarrollador',
+    test_mode_off:'Modo de prueba: guardar tras solo 15s (en vez de 10 min)',
+    test_mode_on:'Modo de prueba ACTIVADO: se puede guardar tras 15 segundos',
+    unlock_all_off:'Desbloquear todas las personalizaciones temporalmente',
+    unlock_all_on:'Desbloqueo temporal ACTIVADO (solo para previsualizar)',
+    item_initial:'Inicial', item_unlocked:'Desbloqueado', item_included:'Incluido', item_premium_label:'Premium',
+    hint_all_dev:'· todo desbloqueado (prueba)', hint_all_premium:'· todo desbloqueado (Premium)',
+    section_my_routines:'Tus rutinas personalizadas',
+    modal_title:'¡Buen entrenamiento!', modal_distance:'Distancia (km)', modal_calories:'Calorías',
+    modal_skip:'Omitir', modal_save:'Guardar',
+    summary_title:'¡Buen entrenamiento!', summary_avg_spm:'spm medio',
+    btn_share:'Compartir resultado', btn_close:'Cerrar',
+    copied:'Copiado al portapapeles', route_completed:'¡Ruta completada!',
+    spm_verb_up:'Sube a', spm_verb_down:'Baja a',
+    boat_classic:'Clásico', boat_viking:'Vikingo', boat_kayak:'Kayak', boat_gondola:'Góndola', boat_dragon:'Bote Dragón', boat_ornate:'Ceremonial',
+    color_red:'Rojo', color_ocean:'Océano', color_forest:'Bosque', color_sunset:'Atardecer', color_carbon:'Carbono', color_gold:'Oro', color_white:'Blanco',
+    oar_spoon:'Clásica', oar_round:'Redonda', oar_hatchet:'Hacha',
+    oar_wood:'Madera', oar_neon:'Neón',
+    sound_click:'Clic', sound_water:'Agua',
+    route_zambezi_name:'Zambezi — Cataratas Victoria', route_zambezi_sub:'Zambia / Zimbabue', route_zambezi_desc:'Descenso desde aguas tranquilas hasta el rugido de las cataratas.',
+    route_henley_name:'Támesis — Henley', route_henley_sub:'Inglaterra', route_henley_desc:'El recorrido clásico de la Henley Royal Regatta.',
+    route_charles_name:'Charles River — Boston', route_charles_sub:'Estados Unidos', route_charles_desc:'Curvas bajo puentes históricos, como el Head of the Charles.',
+    route_lucerne_name:'Lago Lucerna — Test 2K', route_lucerne_sub:'Suiza', route_lucerne_desc:'La pista olímpica de 2000m, el test estándar de competición.',
+    route_seine_name:'Sena — París', route_seine_sub:'Francia', route_seine_desc:'Bajo los puentes históricos, con la Torre Eiffel de fondo.',
+    route_schuylkill_name:'Schuylkill River — Filadelfia', route_schuylkill_sub:'Estados Unidos', route_schuylkill_desc:'Boathouse Row, cuna del remo universitario estadounidense.',
+    route_sydney_name:'Bahía de Sídney', route_sydney_sub:'Australia', route_sydney_desc:'Cruzando la bahía junto a la Ópera y el Harbour Bridge.',
+    route_nilo_name:'Nilo — Templos de Egipto', route_nilo_sub:'Egipto', route_nilo_desc:'Aguas del desierto, entre palmeras y templos milenarios.',
+    seg_calm_waters:'Aguas tranquilas', seg_moderate_current:'Corriente moderada', seg_acceleration:'Aceleración',
+    seg_rapids:'Rápidos — La Catarata', seg_cooldown:'Enfriamiento', seg_start:'Salida', seg_race_pace:'Ritmo de carrera',
+    seg_sprint_finish:'Sprint — línea de meta', seg_calm_down:'Vuelta a la calma', seg_straight:'Tramo recto',
+    seg_bridge_curve:'Curva bajo el puente', seg_tight_curve:'Curva cerrada', seg_final_straight:'Recta final',
+    seg_strong_start:'Salida fuerte', seg_settle:'Asentamiento', seg_final_lap:'Último tramo', seg_final_sprint:'Sprint final',
+    seg_start_notre_dame:'Salida junto a Notre-Dame', seg_tourist_boats:'Esquivando barcos turísticos',
+    seg_eiffel_straight:'Recta hacia la Torre Eiffel', seg_bridge_sprint:'Sprint bajo el puente',
+    seg_warmup:'Calentamiento', seg_long_piece:'Pieza larga — ritmo de carrera',
+    seg_boathouse_sprint:'Sprint frente a Boathouse Row', seg_calm_start:'Salida en calma',
+    seg_bay_swell:'Oleaje de la bahía', seg_ferry_wake:'Estela de los ferris',
+    seg_harbour_sprint:'Sprint bajo el Harbour Bridge',
+    seg_nile_calm:'Aguas tranquilas del Nilo', seg_nile_current:'Corriente entre las orillas',
+    seg_temple_approach:'Acercándose al templo',
+    free_mode_name:'Metrónomo libre',
+    partial_label:'(parcial)',
+    missions_today:'MISIONES DE HOY',
+    mission_min15:'Rema 15 minutos', mission_min25:'Rema 25 minutos',
+    mission_spm24:'Mantén 24 spm de media en una sesión', mission_spm20:'Mantén 20 spm de media en una sesión',
+    mission_route1:'Completa una ruta entera', mission_two_sessions:'Entrena dos veces hoy', mission_dist2:'Rema al menos 2 km',
+    level_prefix:'Nv.', date_locale:'es-ES',
+    ach_done:'Conseguido', ach_pending:'Pendiente',
+    share_text_fn: (route, min, spm, dist, level) => `🚣 Acabo de completar "${route}" — ${min} min, ${spm} spm medio${dist}. ¡Nivel ${level} en Remo! 💪`,
+    streak_days: (n) => `${n} día${n===1?'':'s'} seguidos — ¡sigue así!`,
+    record_text: (prev, now, diff) => `¡Nuevo récord! De ${prev} km subiste a ${now} km (+${diff} km) en el mismo tiempo de siempre.`,
+    levelup_text: (n) => `¡Subiste al nivel ${n}!`,
+    new_achievements_label: 'Logros desbloqueados',
+    cmp_km: (pct) => pct>=0 ? `Este mes remas un <b>+${pct}%</b> más de distancia que el mes pasado.` : `Este mes remas un <b>${Math.abs(pct)}%</b> menos de distancia que el mes pasado.`,
+    cmp_spm: (pct) => pct>=0 ? `Has mejorado tu cadencia media un <b>${Math.abs(pct)}%</b> respecto al mes pasado.` : `Has bajado tu cadencia media un <b>${Math.abs(pct)}%</b> respecto al mes pasado.`,
+    cmp_sessions: (n, prev) => `Has entrenado <b>${n}</b> ${n===1?'vez':'veces'} este mes, frente a <b>${prev}</b> el mes pasado.`,
+    spm_toast: (verb, n) => `${verb} ${n} spm`,
+    modal_partial: (pct) => ` · ruta al ${pct}% (no cuenta para récords)`,
+    save_wait: (time) => `Rema ${time} más para poder guardar`,
+    dist_km: (km) => `, ${km} km`,
+    no_routines_yet:'Aún no has creado ninguna rutina.',
+    routine_use_btn:'Usar',
+    builder_create:'+ Crear nueva rutina',
+    builder_cancel:'Cancelar',
+    builder_add_seg:'+ Añadir tramo',
+    builder_save_routine:'Guardar rutina',
+    builder_seg_placeholder:'Nombre del tramo',
+    builder_name_placeholder:'Nombre de tu rutina (ej. Mi entreno del martes)',
+    request_route_thanks:'¡Gracias! La tendremos en cuenta.',
+    sending_state:'Enviando…', saving_state:'Guardando…',
+    custom_locked_text:'Diseña tu propio entrenamiento con tus intervalos',
+    custom_locked_sub:'Función Premium — elige el SPM y la duración de cada tramo',
+  },
+  en: {
+    nav_home:'Home', nav_free:'Free', nav_routes:'Routes', nav_my:'My', nav_progress:'Progress', nav_style:'Style',
+    hero_title:'Train your indoor rowing cadence like a professional',
+    hero_sub:'A smart metronome that turns every session into a guided workout.',
+    btn_start_training:'Start training', btn_explore:'Explore features',
+    section_why:'Why this app',
+    why1_title:'Keep the perfect cadence', why1_desc:'Visual and audio metronome synchronized with your real stroke: catch, drive and recovery.',
+    why2_title:'Train with immersive routes', why2_desc:'Row through 8 rivers of the world, with the pace changing automatically by segment.',
+    why3_title:'Analyze your progress', why3_desc:'Save distance and calories, and the app detects when you beat your own record.',
+    section_how:'How it works',
+    step1_label:'Set up', step1_desc:'Choose your oar, boat and a route (or the free metronome).',
+    step2_label:'Row', step2_desc:'Follow the visual and audio pace in real time.',
+    step3_label:'Improve', step3_desc:'Save the session and compare your performance.',
+    section_progress:'Your progress',
+    btn_first_cta:'Start your first training', btn_next_cta:'Start your next training',
+    no_sessions_yet:'No training yet — hit "Start training" for your first session.',
+    stat_sessions:'Sessions completed', stat_minutes:'Minutes rowed', stat_best_streak:'Best streak (days)', stat_avg_spm:'Average cadence (spm)',
+    label_pace:'Pace', label_ratio:'Ratio', label_sound:'Sound',
+    sound_click_desc:'click on each catch',
+    btn_start:'▶ Start', btn_pause:'⏸ Pause', btn_resume:'▶ Resume',
+    btn_save_ready:'Save workout', btn_save_idle:'Row 10:00 more to save',
+    choose_route:'Choose a route:', weather_title:'Weather / time of day',
+    request_route_toggle:'Rapids from somewhere specific? Request a route',
+    request_route_placeholder:'E.g. The rapids of the Futaleufú river, Chile',
+    request_route_submit:'Send suggestion',
+    request_route_fine:'Your suggestion is sent directly by email for us to review.',
+    sound_route_label:'Enabled (set in Style)',
+    btn_start_route:'▶ Start route', btn_restart_route:'↻ Restart route', btn_resume_route:'▶ Resume',
+    btn_see_all_routes:'See all routes', route_segments_label:'segments',
+    diff_easy:'Easy', diff_medium:'Medium', diff_hard:'Hard', diff_extreme:'Extreme',
+    weather_day:'Day', weather_dawn:'Dawn', weather_dusk:'Dusk',
+    weather_locked_text:'Dawn and dusk for every route',
+    weather_locked_sub:'Premium feature — changes the light and mood of the scene',
+    section_weekly:'Weekly goals', section_consistency:'Consistency', section_vs_self:'Compared to yourself',
+    section_achievements:'Achievements', section_bests:'Your personal bests by route',
+    section_history:'Training history', btn_clear_history:'Clear history',
+    loading:'Loading…', history_empty:'No workouts saved yet. Finish one and log it here!',
+    bests_empty:'No personal bests yet. Log your distance after a route to start comparing your performance.',
+    comparison_empty:'Train for a couple of months to start seeing self-comparisons.',
+    history_load_error:'Could not load history.',
+    stat_workouts:'Workouts', stat_total_minutes:'Total minutes', stat_total_distance:'Total distance', stat_total_calories:'Total calories',
+    weekly_minutes:'Minutes', weekly_distance:'Distance', weekly_workouts:'Workouts',
+    cal_less:'Less', cal_more:'More',
+    section_skin:'Skin tone', section_boat_shape:'Boat shape', section_boat_color:'Boat color',
+    section_oar_shape:'Oar shape', section_oar_color:'Oar color', section_oar_sound:'Oar sound',
+    section_dev:'Developer mode',
+    test_mode_off:'Test mode: save after just 15s (instead of 10 min)',
+    test_mode_on:'Test mode ACTIVE: can save after 15 seconds',
+    unlock_all_off:'Temporarily unlock all customizations',
+    unlock_all_on:'Temporary unlock ACTIVE (preview only)',
+    item_initial:'Starter', item_unlocked:'Unlocked', item_included:'Included', item_premium_label:'Premium',
+    hint_all_dev:'· all unlocked (test)', hint_all_premium:'· all unlocked (Premium)',
+    section_my_routines:'Your custom routines',
+    modal_title:'Great workout!', modal_distance:'Distance (km)', modal_calories:'Calories',
+    modal_skip:'Skip', modal_save:'Save',
+    summary_title:'Great workout!', summary_avg_spm:'avg spm',
+    btn_share:'Share result', btn_close:'Close',
+    copied:'Copied to clipboard', route_completed:'Route completed!',
+    spm_verb_up:'Up to', spm_verb_down:'Down to',
+    boat_classic:'Classic', boat_viking:'Viking', boat_kayak:'Kayak', boat_gondola:'Gondola', boat_dragon:'Dragon Boat', boat_ornate:'Ceremonial',
+    color_red:'Red', color_ocean:'Ocean', color_forest:'Forest', color_sunset:'Sunset', color_carbon:'Carbon', color_gold:'Gold', color_white:'White',
+    oar_spoon:'Classic', oar_round:'Round', oar_hatchet:'Hatchet',
+    oar_wood:'Wood', oar_neon:'Neon',
+    sound_click:'Click', sound_water:'Water',
+    route_zambezi_name:'Zambezi — Victoria Falls', route_zambezi_sub:'Zambia / Zimbabwe', route_zambezi_desc:'Descent from calm waters to the roar of the falls.',
+    route_henley_name:'Thames — Henley', route_henley_sub:'England', route_henley_desc:'The classic course of the Henley Royal Regatta.',
+    route_charles_name:'Charles River — Boston', route_charles_sub:'United States', route_charles_desc:'Curves under historic bridges, like the Head of the Charles.',
+    route_lucerne_name:'Lake Lucerne — 2K Test', route_lucerne_sub:'Switzerland', route_lucerne_desc:'The 2000m Olympic course, the standard competition test.',
+    route_seine_name:'Seine — Paris', route_seine_sub:'France', route_seine_desc:'Under historic bridges, with the Eiffel Tower in the background.',
+    route_schuylkill_name:'Schuylkill River — Philadelphia', route_schuylkill_sub:'United States', route_schuylkill_desc:'Boathouse Row, the birthplace of American collegiate rowing.',
+    route_sydney_name:'Sydney Harbour', route_sydney_sub:'Australia', route_sydney_desc:'Crossing the harbour past the Opera House and Harbour Bridge.',
+    route_nilo_name:'Nile — Temples of Egypt', route_nilo_sub:'Egypt', route_nilo_desc:'Desert waters, between palm trees and ancient temples.',
+    seg_calm_waters:'Calm waters', seg_moderate_current:'Moderate current', seg_acceleration:'Acceleration',
+    seg_rapids:'Rapids — The Falls', seg_cooldown:'Cool-down', seg_start:'Start', seg_race_pace:'Race pace',
+    seg_sprint_finish:'Sprint — finish line', seg_calm_down:'Ease off', seg_straight:'Straight',
+    seg_bridge_curve:'Curve under the bridge', seg_tight_curve:'Tight curve', seg_final_straight:'Final straight',
+    seg_strong_start:'Strong start', seg_settle:'Settle', seg_final_lap:'Last segment', seg_final_sprint:'Final sprint',
+    seg_start_notre_dame:'Start by Notre-Dame', seg_tourist_boats:'Dodging tourist boats',
+    seg_eiffel_straight:'Straight to the Eiffel Tower', seg_bridge_sprint:'Sprint under the bridge',
+    seg_warmup:'Warm-up', seg_long_piece:'Long piece — race pace',
+    seg_boathouse_sprint:'Sprint past Boathouse Row', seg_calm_start:'Calm start',
+    seg_bay_swell:'Harbour swell', seg_ferry_wake:'Ferry wake',
+    seg_harbour_sprint:'Sprint under Harbour Bridge',
+    seg_nile_calm:'Calm Nile waters', seg_nile_current:'Current between the banks',
+    seg_temple_approach:'Approaching the temple',
+    free_mode_name:'Free Metronome',
+    partial_label:'(partial)',
+    missions_today:"TODAY'S MISSIONS",
+    mission_min15:'Row 15 minutes', mission_min25:'Row 25 minutes',
+    mission_spm24:'Keep 24 spm average in one session', mission_spm20:'Keep 20 spm average in one session',
+    mission_route1:'Complete a full route', mission_two_sessions:'Train twice today', mission_dist2:'Row at least 2 km',
+    level_prefix:'Lv.', date_locale:'en-US',
+    ach_done:'Done', ach_pending:'Pending',
+    share_text_fn: (route, min, spm, dist, level) => `🚣 Just completed "${route}" — ${min} min, ${spm} avg spm${dist}. Level ${level} on Rowing! 💪`,
+    streak_days: (n) => `${n} day${n===1?'':' '} in a row — keep it up!`,
+    record_text: (prev, now, diff) => `New record! You went from ${prev} km to ${now} km (+${diff} km) in the same time as usual.`,
+    levelup_text: (n) => `You reached level ${n}!`,
+    new_achievements_label: 'Achievements unlocked',
+    cmp_km: (pct) => pct>=0 ? `This month you row <b>+${pct}%</b> more distance than last month.` : `This month you row <b>${Math.abs(pct)}%</b> less distance than last month.`,
+    cmp_spm: (pct) => pct>=0 ? `Your average cadence improved by <b>${Math.abs(pct)}%</b> compared to last month.` : `Your average cadence dropped by <b>${Math.abs(pct)}%</b> compared to last month.`,
+    cmp_sessions: (n, prev) => `You trained <b>${n}</b> ${n===1?'time':'times'} this month, vs. <b>${prev}</b> last month.`,
+    spm_toast: (verb, n) => `${verb} ${n} spm`,
+    modal_partial: (pct) => ` · route at ${pct}% (doesn't count for records)`,
+    save_wait: (time) => `Row ${time} more to save`,
+    dist_km: (km) => `, ${km} km`,
+    no_routines_yet:'No custom routines yet.',
+    routine_use_btn:'Use',
+    builder_create:'+ Create new routine',
+    builder_cancel:'Cancel',
+    builder_add_seg:'+ Add segment',
+    builder_save_routine:'Save routine',
+    builder_seg_placeholder:'Segment name',
+    builder_name_placeholder:'Routine name (e.g. My Tuesday workout)',
+    request_route_thanks:'Thanks! We\'ll look into it.',
+    sending_state:'Sending…', saving_state:'Saving…',
+    custom_locked_text:'Design your own workout with your own intervals',
+    custom_locked_sub:'Premium feature — choose the SPM and duration of each segment',
+  }
+};
+function t(key) {
+  const v = (T[lang] && T[lang][key]) ?? (T.es && T.es[key]);
+  return (typeof v === 'function') ? v : (v !== undefined ? v : key);
+}
+function setLang(l) {
+  lang = l; localStorage.setItem('remo_lang', l);
+  document.documentElement.lang = l;
+  if (typeof applyI18n === 'function') applyI18n();
 }
 
 (function() {
@@ -1206,9 +1459,9 @@ if (!window.storage) {
 
   // ---------- PREMIUM: weather / time-of-day variants ----------
   const WEATHER_VARIANTS = [
-    { id: 'day',  name: 'Día',       icon: 'sun' },
-    { id: 'dawn', name: 'Amanecer',  icon: 'sunrise' },
-    { id: 'dusk', name: 'Atardecer', icon: 'sunrise' }
+    { id: 'day',  icon: 'sun' },
+    { id: 'dawn', icon: 'sunrise' },
+    { id: 'dusk', icon: 'sunrise' }
   ];
   const WEATHER_STYLES = {
     day:  { fill: 'none',    opacity: 0,    rain: false },
@@ -1636,8 +1889,8 @@ if (!window.storage) {
       pausedSegElapsedSec = liveSegElapsed; // preserve exact position so we can resume later, even if the user just switched tabs
     }
     playing = false;
-    document.getElementById('playBtn').textContent = '▶ Empezar'; document.getElementById('playBtn').classList.remove('playing');
-    document.getElementById('playBtnR').textContent = routineInProgress ? '▶ Reanudar' : '▶ Empezar ruta';
+    document.getElementById('playBtn').textContent = t('btn_start'); document.getElementById('playBtn').classList.remove('playing');
+    document.getElementById('playBtnR').textContent = routineInProgress ? t('btn_resume_route') : t('btn_start_route');
     document.getElementById('playBtnR').classList.remove('playing');
     stopAnimation(); segmentBar.classList.add('hidden'); setSceneTheme('calm');
     document.getElementById('routineSelectUI').classList.remove('hidden');
@@ -1675,37 +1928,40 @@ if (!window.storage) {
       btn.disabled = true;
       document.getElementById('sceneWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
       runCountdown(() => {
-        playing = true; btn.textContent='⏸ Pausar'; btn.classList.add('playing'); btn.disabled = false; startAnimation();
+        playing = true; btn.textContent=t('btn_pause'); btn.classList.add('playing'); btn.disabled = false; startAnimation();
         freeSessionStart = Date.now();
       });
     } else {
-      playing = false; this.textContent='▶ Empezar'; this.classList.remove('playing'); stopAnimation();
+      playing = false; this.textContent=t('btn_start'); this.classList.remove('playing'); stopAnimation();
       const elapsedSec = freeSessionStart ? (Date.now() - freeSessionStart) / 1000 : 0;
       if (elapsedSec >= MIN_SAVE_SECONDS) {
-        openCompletionModal({ type: 'Metrónomo libre', routeName: 'Metrónomo libre', durationSeconds: elapsedSec, avgSpm: spm });
+        openCompletionModal({ type: 'Metrónomo libre', routeName: t('free_mode_name'), durationSeconds: elapsedSec, avgSpm: spm });
       }
       freeSessionStart = null;
     }
   });
 
-  const ROUTES = [
-    { id: 'zambezi', name: 'Zambezi — Cataratas Victoria', sub: 'Zambia / Zimbabue', desc: 'Descenso desde aguas tranquilas hasta el rugido de las cataratas.', premium: false,
-      segments: [ {name:'Aguas tranquilas',spm:16,duration:180,theme:'calm'}, {name:'Corriente moderada',spm:20,duration:180,theme:'moderate'}, {name:'Aceleración',spm:24,duration:120,theme:'accel'}, {name:'Rápidos — La Catarata',spm:30,duration:90,theme:'rapids'}, {name:'Enfriamiento',spm:16,duration:120,theme:'calm'} ] },
-    { id: 'henley', name: 'Támesis — Henley', sub: 'Inglaterra', desc: 'El recorrido clásico de la Henley Royal Regatta.', premium: false,
-      segments: [ {name:'Salida',spm:18,duration:60,theme:'calm'}, {name:'Ritmo de carrera',spm:26,duration:480,theme:'moderate'}, {name:'Sprint — línea de meta',spm:32,duration:60,theme:'accel'}, {name:'Vuelta a la calma',spm:16,duration:60,theme:'calm'} ] },
-    { id: 'charles', name: 'Charles River — Boston', sub: 'Estados Unidos', desc: 'Curvas bajo puentes históricos, como el Head of the Charles.', premium: true,
-      segments: [ {name:'Tramo recto',spm:20,duration:120,theme:'calm'}, {name:'Curva bajo el puente',spm:24,duration:90,theme:'moderate'}, {name:'Tramo recto',spm:22,duration:120,theme:'moderate'}, {name:'Curva cerrada',spm:26,duration:90,theme:'accel'}, {name:'Recta final',spm:28,duration:120,theme:'accel'}, {name:'Enfriamiento',spm:16,duration:90,theme:'calm'} ] },
-    { id: 'lucerne', name: 'Lago Lucerna — Test 2K', sub: 'Suiza', desc: 'La pista olímpica de 2000m, el test estándar de competición.', premium: true,
-      segments: [ {name:'Salida fuerte',spm:32,duration:30,theme:'accel'}, {name:'Asentamiento',spm:24,duration:480,theme:'moderate'}, {name:'Último tramo',spm:28,duration:90,theme:'accel'}, {name:'Sprint final',spm:34,duration:30,theme:'rapids'} ] },
-    { id: 'seine', name: 'Sena — París', sub: 'Francia', desc: 'Bajo los puentes históricos, con la Torre Eiffel de fondo.', premium: true,
-      segments: [ {name:'Salida junto a Notre-Dame',spm:18,duration:60,theme:'calm'}, {name:'Esquivando barcos turísticos',spm:23,duration:180,theme:'moderate'}, {name:'Recta hacia la Torre Eiffel',spm:27,duration:180,theme:'accel'}, {name:'Sprint bajo el puente',spm:30,duration:90,theme:'rapids'}, {name:'Enfriamiento',spm:16,duration:120,theme:'calm'} ] },
-    { id: 'schuylkill', name: 'Schuylkill River — Filadelfia', sub: 'Estados Unidos', desc: 'Boathouse Row, cuna del remo universitario estadounidense.', premium: true,
-      segments: [ {name:'Calentamiento',spm:18,duration:120,theme:'calm'}, {name:'Pieza larga — ritmo de carrera',spm:24,duration:600,theme:'moderate'}, {name:'Sprint frente a Boathouse Row',spm:30,duration:60,theme:'accel'}, {name:'Enfriamiento',spm:16,duration:120,theme:'calm'} ] },
-    { id: 'sydney', name: 'Bahía de Sídney', sub: 'Australia', desc: 'Cruzando la bahía junto a la Ópera y el Harbour Bridge.', premium: true,
-      segments: [ {name:'Salida en calma',spm:18,duration:120,theme:'calm'}, {name:'Oleaje de la bahía',spm:22,duration:180,theme:'moderate'}, {name:'Estela de los ferris',spm:26,duration:120,theme:'accel'}, {name:'Sprint bajo el Harbour Bridge',spm:31,duration:90,theme:'rapids'}, {name:'Enfriamiento',spm:16,duration:120,theme:'calm'} ] },
-    { id: 'nilo', name: 'Nilo — Templos de Egipto', sub: 'Egipto', desc: 'Aguas del desierto, entre palmeras y templos milenarios.', premium: true,
-      segments: [ {name:'Aguas tranquilas del Nilo',spm:16,duration:120,theme:'calm'}, {name:'Corriente entre las orillas',spm:21,duration:180,theme:'moderate'}, {name:'Acercándose al templo',spm:25,duration:120,theme:'accel'}, {name:'Sprint final',spm:29,duration:90,theme:'rapids'}, {name:'Enfriamiento',spm:15,duration:120,theme:'calm'} ] }
-  ];
+  function getRoutes() {
+    return [
+      { id: 'zambezi', name: t('route_zambezi_name'), sub: t('route_zambezi_sub'), desc: t('route_zambezi_desc'), premium: false,
+        segments: [ {name:t('seg_calm_waters'),spm:16,duration:180,theme:'calm'}, {name:t('seg_moderate_current'),spm:20,duration:180,theme:'moderate'}, {name:t('seg_acceleration'),spm:24,duration:120,theme:'accel'}, {name:t('seg_rapids'),spm:30,duration:90,theme:'rapids'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
+      { id: 'henley', name: t('route_henley_name'), sub: t('route_henley_sub'), desc: t('route_henley_desc'), premium: false,
+        segments: [ {name:t('seg_start'),spm:18,duration:60,theme:'calm'}, {name:t('seg_race_pace'),spm:26,duration:480,theme:'moderate'}, {name:t('seg_sprint_finish'),spm:32,duration:60,theme:'accel'}, {name:t('seg_calm_down'),spm:16,duration:60,theme:'calm'} ] },
+      { id: 'charles', name: t('route_charles_name'), sub: t('route_charles_sub'), desc: t('route_charles_desc'), premium: true,
+        segments: [ {name:t('seg_straight'),spm:20,duration:120,theme:'calm'}, {name:t('seg_bridge_curve'),spm:24,duration:90,theme:'moderate'}, {name:t('seg_straight'),spm:22,duration:120,theme:'moderate'}, {name:t('seg_tight_curve'),spm:26,duration:90,theme:'accel'}, {name:t('seg_final_straight'),spm:28,duration:120,theme:'accel'}, {name:t('seg_cooldown'),spm:16,duration:90,theme:'calm'} ] },
+      { id: 'lucerne', name: t('route_lucerne_name'), sub: t('route_lucerne_sub'), desc: t('route_lucerne_desc'), premium: true,
+        segments: [ {name:t('seg_strong_start'),spm:32,duration:30,theme:'accel'}, {name:t('seg_settle'),spm:24,duration:480,theme:'moderate'}, {name:t('seg_final_lap'),spm:28,duration:90,theme:'accel'}, {name:t('seg_final_sprint'),spm:34,duration:30,theme:'rapids'} ] },
+      { id: 'seine', name: t('route_seine_name'), sub: t('route_seine_sub'), desc: t('route_seine_desc'), premium: true,
+        segments: [ {name:t('seg_start_notre_dame'),spm:18,duration:60,theme:'calm'}, {name:t('seg_tourist_boats'),spm:23,duration:180,theme:'moderate'}, {name:t('seg_eiffel_straight'),spm:27,duration:180,theme:'accel'}, {name:t('seg_bridge_sprint'),spm:30,duration:90,theme:'rapids'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
+      { id: 'schuylkill', name: t('route_schuylkill_name'), sub: t('route_schuylkill_sub'), desc: t('route_schuylkill_desc'), premium: true,
+        segments: [ {name:t('seg_warmup'),spm:18,duration:120,theme:'calm'}, {name:t('seg_long_piece'),spm:24,duration:600,theme:'moderate'}, {name:t('seg_boathouse_sprint'),spm:30,duration:60,theme:'accel'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
+      { id: 'sydney', name: t('route_sydney_name'), sub: t('route_sydney_sub'), desc: t('route_sydney_desc'), premium: true,
+        segments: [ {name:t('seg_calm_start'),spm:18,duration:120,theme:'calm'}, {name:t('seg_bay_swell'),spm:22,duration:180,theme:'moderate'}, {name:t('seg_ferry_wake'),spm:26,duration:120,theme:'accel'}, {name:t('seg_harbour_sprint'),spm:31,duration:90,theme:'rapids'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
+      { id: 'nilo', name: t('route_nilo_name'), sub: t('route_nilo_sub'), desc: t('route_nilo_desc'), premium: true,
+        segments: [ {name:t('seg_nile_calm'),spm:16,duration:120,theme:'calm'}, {name:t('seg_nile_current'),spm:21,duration:180,theme:'moderate'}, {name:t('seg_temple_approach'),spm:25,duration:120,theme:'accel'}, {name:t('seg_final_sprint'),spm:29,duration:90,theme:'rapids'}, {name:t('seg_cooldown'),spm:15,duration:120,theme:'calm'} ] }
+    ];
+  }
+  let ROUTES = getRoutes();
   let selectedRoute = ROUTES[0], currentSegIndex = 0, segStartTime = null, routineTotalDuration = 0, routineElapsedBeforeSeg = 0;
   let routineInProgress = false, pausedSegElapsedSec = 0, resumeOffsetMs = 0;
   function updateRestartButtonVisibility() {
@@ -1720,12 +1976,15 @@ if (!window.storage) {
     setScenery(selectedRoute.id, selectedWeather);
   });
   function totalDuration(route) { return route.segments.reduce((a,s)=>a+s.duration,0); }
-  const DIFFICULTY_LEVELS = [
-    { label: 'Fácil',   color: '#4caf50' },
-    { label: 'Medio',   color: '#f2a93b' },
-    { label: 'Difícil', color: '#e0672c' },
-    { label: 'Extremo', color: '#c0392b' }
-  ];
+  function getDifficultyLevels() {
+    return [
+      { label: t('diff_easy'),    color: '#4caf50' },
+      { label: t('diff_medium'),  color: '#f2a93b' },
+      { label: t('diff_hard'),    color: '#e0672c' },
+      { label: t('diff_extreme'), color: '#c0392b' }
+    ];
+  }
+  let DIFFICULTY_LEVELS = getDifficultyLevels();
   function computeDifficulty(route) {
     const totalMin = totalDuration(route) / 60;
     const maxSpm = Math.max(...route.segments.map(s => s.spm));
@@ -1748,11 +2007,11 @@ if (!window.storage) {
       const crown = selectedRoute.premium ? ' <span class="crown-badge">' + icon('award',{size:12}) + '</span>' : '';
       const card = document.createElement('div');
       card.className = 'route-card selected';
-      card.innerHTML = `<div><div class="rc-title">${selectedRoute.name}${crown}</div><div class="rc-sub">${selectedRoute.sub} · ${selectedRoute.desc}</div></div><div class="rc-meta"><span class="rg-dot" style="background:${lvl.color};"></span> ${lvl.label}<br>${mins} min · ${selectedRoute.segments.length} tramos</div>`;
+      card.innerHTML = `<div><div class="rc-title">${selectedRoute.name}${crown}</div><div class="rc-sub">${selectedRoute.sub} · ${selectedRoute.desc}</div></div><div class="rc-meta"><span class="rg-dot" style="background:${lvl.color};"></span> ${lvl.label}<br>${mins} min · ${selectedRoute.segments.length} ${t('route_segments_label')}</div>`;
       list.appendChild(card);
       const changeBtn = document.createElement('button');
       changeBtn.className = 'change-route-btn';
-      changeBtn.textContent = 'Ver todas las rutas';
+      changeBtn.textContent = t('btn_see_all_routes');
       changeBtn.addEventListener('click', () => { routeListCollapsed = false; renderRouteList(); });
       list.appendChild(changeBtn);
       return;
@@ -1778,12 +2037,12 @@ if (!window.storage) {
         const mins = Math.round(totalDuration(r)/60*10)/10;
         const crown = r.premium ? ' <span class="crown-badge">' + icon('award',{size:12}) + '</span>' : '';
         const diff = lvl;
-        card.innerHTML = `<div><div class="rc-title">${r.name}${crown}</div><div class="rc-sub">${r.sub} · ${r.desc}</div></div><div class="rc-meta"><span class="rg-dot" style="background:${diff.color};"></span> ${diff.label}<br>${mins} min · ${r.segments.length} tramos</div>`;
+        card.innerHTML = `<div><div class="rc-title">${r.name}${crown}</div><div class="rc-sub">${r.sub} · ${r.desc}</div></div><div class="rc-meta"><span class="rg-dot" style="background:${diff.color};"></span> ${diff.label}<br>${mins} min · ${r.segments.length} ${t('route_segments_label')}</div>`;
         card.addEventListener('click', () => {
           if (isLocked) { showPanel('premium'); return; }
           selectedRoute = r; routeListCollapsed = true;
           routineInProgress = false; pausedSegElapsedSec = 0; updateRestartButtonVisibility(); currentSegIndex = 0; routineElapsedBeforeSeg = 0; updateRestartButtonVisibility();
-          document.getElementById('playBtnR').textContent = '▶ Empezar ruta';
+          document.getElementById('playBtnR').textContent = t('btn_start_route');
           renderRouteList(); renderSegPreview(); setScenery(r.id);
         });
         list.appendChild(card);
@@ -1803,8 +2062,8 @@ if (!window.storage) {
         <div class="locked-prompt" id="weatherLockedPrompt">
           <span class="lp-crown">${icon('award',{size:24})}</span>
           <div>
-            <div class="lp-text">Amanecer y atardecer para cada ruta</div>
-            <div class="lp-sub">Función Premium — cambia la luz y el ambiente de la escena</div>
+            <div class="lp-text">${t('weather_locked_text')}</div>
+            <div class="lp-sub">${t('weather_locked_sub')}</div>
           </div>
         </div>`;
       document.getElementById('weatherLockedPrompt').addEventListener('click', () => showPanel('premium'));
@@ -1815,7 +2074,7 @@ if (!window.storage) {
     WEATHER_VARIANTS.forEach(w => {
       const btn = document.createElement('div');
       btn.className = 'weather-pill' + (w.id === selectedWeather ? ' selected' : '');
-      btn.innerHTML = `<span class="wp-icon">${icon(w.icon,{size:18})}</span>${w.name}`;
+      btn.innerHTML = `<span class="wp-icon">${icon(w.icon,{size:18})}</span>${t('weather_'+w.id)}`;
       btn.addEventListener('click', () => { setScenery(selectedRoute.id, w.id); renderWeatherPicker(); });
       pillsWrap.appendChild(btn);
     });
@@ -1832,7 +2091,7 @@ if (!window.storage) {
   requestRouteSubmit.addEventListener('click', async () => {
     const text = requestRouteInput.value.trim();
     if (!text) return;
-    requestRouteSubmit.disabled = true; requestRouteSubmit.textContent = 'Enviando…';
+    requestRouteSubmit.disabled = true; requestRouteSubmit.textContent = t('sending_state');
     try {
       // 1) Keep a local copy too (works across the app even without an internet connection to send mail)
       let list = [];
@@ -1861,11 +2120,11 @@ if (!window.storage) {
       }
 
       requestRouteInput.value = '';
-      requestRouteToggle.textContent = '¡Gracias! La tendremos en cuenta.';
-      setTimeout(() => { requestRouteToggle.textContent = '¿Rápidos de algún sitio en concreto? Pide tu ruta'; }, 2500);
+      requestRouteToggle.textContent = t('request_route_thanks');
+      setTimeout(() => { requestRouteToggle.textContent = t('request_route_toggle'); }, 2500);
       requestRouteForm.classList.add('hidden');
     } finally {
-      requestRouteSubmit.disabled = false; requestRouteSubmit.textContent = 'Enviar sugerencia';
+      requestRouteSubmit.disabled = false; requestRouteSubmit.textContent = t('request_route_submit');
     }
   });
 
@@ -1891,7 +2150,7 @@ if (!window.storage) {
     builderSegments.forEach((seg, i) => {
       rows += `
         <div class="builder-seg-row" data-idx="${i}">
-          <input type="text" class="bs-name" placeholder="Nombre del tramo" value="${seg.name}">
+          <input type="text" class="bs-name" placeholder="${t('builder_seg_placeholder')}" value="${seg.name}">
           <input type="number" class="bs-spm" placeholder="SPM" min="10" max="40" value="${seg.spm}">
           <input type="number" class="bs-min" placeholder="Min" min="0.5" step="0.5" value="${seg.minutes}">
           <button class="bs-remove" data-idx="${i}">&times;</button>
@@ -1900,13 +2159,13 @@ if (!window.storage) {
     return `
       <div class="builder-form" id="builderForm">
         <div class="builder-name-row">
-          <input type="text" id="builderNameInput" placeholder="Nombre de tu rutina (ej. Mi entreno del martes)">
+          <input type="text" id="builderNameInput" placeholder="${t('builder_name_placeholder')}">
         </div>
         <div id="builderSegRows">${rows}</div>
-        <button class="builder-add-btn" id="addBuilderSegBtn">+ Añadir tramo</button>
+        <button class="builder-add-btn" id="addBuilderSegBtn">${t('builder_add_seg')}</button>
         <div class="builder-save-row">
-          <button class="bs-cancel" id="cancelBuilderBtn">Cancelar</button>
-          <button class="bs-save" id="saveBuilderBtn">Guardar rutina</button>
+          <button class="bs-cancel" id="cancelBuilderBtn">${t('builder_cancel')}</button>
+          <button class="bs-save" id="saveBuilderBtn">${t('builder_save_routine')}</button>
         </div>
       </div>`;
   }
@@ -1956,8 +2215,8 @@ if (!window.storage) {
         <div class="locked-prompt" id="customRoutineLockedPrompt">
           <span class="lp-crown">${icon('award',{size:24})}</span>
           <div>
-            <div class="lp-text">Diseña tu propio entrenamiento con tus intervalos</div>
-            <div class="lp-sub">Función Premium — elige el SPM y la duración de cada tramo</div>
+            <div class="lp-text">${t('custom_locked_text')}</div>
+            <div class="lp-sub">${t('custom_locked_sub')}</div>
           </div>
         </div>`;
       document.getElementById('customRoutineLockedPrompt').addEventListener('click', () => showPanel('premium'));
@@ -1969,15 +2228,15 @@ if (!window.storage) {
       const mins = Math.round(totalDuration(r)/60*10)/10;
       html += `
         <div class="custom-route-item${r.id === selectedRoute.id ? ' selected' : ''}">
-          <div class="cr-info"><b>${r.name}</b><br>${mins} min · ${r.segments.length} tramos</div>
+          <div class="cr-info"><b>${r.name}</b><br>${mins} min · ${r.segments.length} ${t('route_segments_label')}</div>
           <div class="cr-actions">
-            <button class="use-btn" data-id="${r.id}">Usar</button>
+            <button class="use-btn" data-id="${r.id}">${t('routine_use_btn')}</button>
             <button class="delete" data-id="${r.id}">&times;</button>
           </div>
         </div>`;
     });
-    if (customRoutes.length === 0) html += `<div class="empty-state">Aún no has creado ninguna rutina.</div>`;
-    html += `<button class="builder-toggle-btn" id="toggleBuilderBtn">${builderOpen ? 'Cancelar' : '+ Crear nueva rutina'}</button>`;
+    if (customRoutes.length === 0) html += `<div class="empty-state">${t('no_routines_yet')}</div>`;
+    html += `<button class="builder-toggle-btn" id="toggleBuilderBtn">${builderOpen ? t('builder_cancel') : t('builder_create')}</button>`;
     if (builderOpen) html += renderBuilderFormHTML();
     wrap.innerHTML = html;
 
@@ -1986,7 +2245,7 @@ if (!window.storage) {
       if (r) {
         selectedRoute = r;
         routineInProgress = false; pausedSegElapsedSec = 0; updateRestartButtonVisibility(); currentSegIndex = 0; routineElapsedBeforeSeg = 0; updateRestartButtonVisibility();
-        document.getElementById('playBtnR').textContent = '▶ Empezar ruta';
+        document.getElementById('playBtnR').textContent = t('btn_start_route');
         renderRouteList(); renderSegPreview(); setScenery('default'); renderCustomRoutineSection();
       }
     }));
@@ -1996,7 +2255,7 @@ if (!window.storage) {
       if (selectedRoute.id === btn.dataset.id) {
         selectedRoute = ROUTES[0];
         routineInProgress = false; pausedSegElapsedSec = 0; updateRestartButtonVisibility(); currentSegIndex = 0; routineElapsedBeforeSeg = 0; updateRestartButtonVisibility();
-        document.getElementById('playBtnR').textContent = '▶ Empezar ruta';
+        document.getElementById('playBtnR').textContent = t('btn_start_route');
         renderRouteList(); renderSegPreview(); setScenery(selectedRoute.id);
       }
       renderCustomRoutineSection();
@@ -2030,12 +2289,13 @@ if (!window.storage) {
       routineElapsedBeforeSeg += seg.duration; currentSegIndex++;
       if (currentSegIndex >= selectedRoute.segments.length) {
         const finalElapsed = routineElapsedBeforeSeg;
-        stopEverything(); setPhaseLabelText('¡Ruta completada!');
+        stopEverything(); setPhaseLabelText(t('route_completed'));
         routineInProgress = false; pausedSegElapsedSec = 0; updateRestartButtonVisibility();
-        document.getElementById('playBtnR').textContent = '▶ Empezar ruta';
+        document.getElementById('playBtnR').textContent = t('btn_start_route');
         if (finalElapsed >= MIN_SAVE_SECONDS) {
           const avgSpm = Math.round(selectedRoute.segments.reduce((a,s)=>a+s.spm*s.duration,0) / routineTotalDuration);
-          openCompletionModal({ type: 'Ruta', routeName: selectedRoute.name, durationSeconds: finalElapsed, avgSpm, completed: true, weather: selectedWeather });
+          const storedRouteName = T.es['route_' + selectedRoute.id + '_name'] || selectedRoute.name;
+          openCompletionModal({ type: 'Ruta', routeName: storedRouteName, durationSeconds: finalElapsed, avgSpm, completed: true, weather: selectedWeather });
         }
         return;
       }
@@ -2047,8 +2307,8 @@ if (!window.storage) {
     const toast = document.getElementById('spmToast');
     const text = document.getElementById('spmToastText');
     const arrow = newSpm > oldSpm ? '⬆️' : '⬇️';
-    const verb = newSpm > oldSpm ? 'Sube a' : 'Baja a';
-    text.textContent = `${arrow} ${verb} ${newSpm} spm`;
+    const verb = newSpm > oldSpm ? t('spm_verb_up') : t('spm_verb_down');
+    text.textContent = `${arrow} ${T[lang].spm_toast(verb, newSpm)}`;
     toast.classList.add('show');
     clearTimeout(spmToastTimeout);
     spmToastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
@@ -2089,12 +2349,12 @@ if (!window.storage) {
     [manualSaveBtnFree, manualSaveBtnRoutine].forEach(btn => {
       if (elapsed >= MIN_SAVE_SECONDS) {
         btn.disabled = false;
-        btn.textContent = 'Guardar entrenamiento';
+        btn.textContent = t('btn_save_ready');
       } else {
         btn.disabled = true;
         btn.textContent = playing
-          ? `Rema ${formatMinSec(remaining)} más para poder guardar`
-          : 'Rema 10:00 más para poder guardar';
+          ? T[lang].save_wait(formatMinSec(remaining))
+          : t('btn_save_idle');
       }
     });
   }
@@ -2104,22 +2364,22 @@ if (!window.storage) {
     const elapsed = getCurrentElapsedSeconds();
     const currentSpm = spm;
     playing = false;
-    document.getElementById('playBtn').textContent = '▶ Empezar';
+    document.getElementById('playBtn').textContent = t('btn_start');
     document.getElementById('playBtn').classList.remove('playing');
     stopAnimation();
     freeSessionStart = null;
     updateSaveButtons();
-    openCompletionModal({ type: 'Metrónomo libre', routeName: 'Metrónomo libre', durationSeconds: elapsed, avgSpm: currentSpm });
+    openCompletionModal({ type: 'Metrónomo libre', routeName: t('free_mode_name'), durationSeconds: elapsed, avgSpm: currentSpm });
   });
   manualSaveBtnRoutine.addEventListener('click', () => {
     if (manualSaveBtnRoutine.disabled) return;
     const elapsed = getCurrentElapsedSeconds();
     const avgSpm = computeLiveAvgSpm();
-    const routeName = selectedRoute.name;
+    const routeName = T.es['route_' + selectedRoute.id + '_name'] || selectedRoute.name;
     const percentDone = Math.round((elapsed / routineTotalDuration) * 100);
     stopEverything();
     routineInProgress = false; pausedSegElapsedSec = 0; updateRestartButtonVisibility(); currentSegIndex = 0; routineElapsedBeforeSeg = 0; updateRestartButtonVisibility();
-    document.getElementById('playBtnR').textContent = '▶ Empezar ruta';
+    document.getElementById('playBtnR').textContent = t('btn_start_route');
     openCompletionModal({ type: 'Ruta', routeName, durationSeconds: elapsed, avgSpm, completed: false, percentDone, weather: selectedWeather });
   });
 
@@ -2131,7 +2391,7 @@ if (!window.storage) {
       btn.disabled = true;
       document.getElementById('sceneWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
       runCountdown(() => {
-        playing = true; btn.textContent='⏸ Pausar'; btn.classList.add('playing'); btn.disabled = false;
+        playing = true; btn.textContent=t('btn_pause'); btn.classList.add('playing'); btn.disabled = false;
         if (!routineInProgress) {
           // Fresh start of a routine.
           currentSegIndex = 0; routineElapsedBeforeSeg = 0; pausedSegElapsedSec = 0;
@@ -2150,7 +2410,7 @@ if (!window.storage) {
         startAnimation();
       });
     } else {
-      playing = false; this.textContent='▶ Reanudar'; this.classList.remove('playing');
+      playing = false; this.textContent=t('btn_resume'); this.classList.remove('playing');
       pausedSegElapsedSec = liveSegElapsed; // remember exactly how far into this segment we were
       stopAnimation();
       document.getElementById('routineSelectUI').classList.remove('hidden');
@@ -2261,73 +2521,107 @@ if (!window.storage) {
       }
     }));
   }
-  const ACHIEVEMENTS = [
-    ...makeMilestones('dist', '🌊', 'km', [1,5,10,25,50,100,250,500], 'totalKm',
-      t => `${t} km recorridos`, t => `Suma ${t} km remados en total.`),
-    ...makeMilestones('time', '⏱️', 'h', [1,5,10,25,50,100], 'totalHours',
-      t => `${t} horas remando`, t => `Acumula ${t} horas de remo en total.`),
-    ...makeMilestones('sessions', '🚣', 'sesiones', [1,5,10,25,50,100,250], 'totalSessions',
-      t => t === 1 ? 'Primer entrenamiento' : `${t} entrenamientos`, t => `Completa ${t} sesiones de remo.`),
-    ...makeMilestones('streak', '🔥', 'días', [3,7,14,30,60,100], 'bestStreak',
-      t => `Racha de ${t} días`, t => `Entrena ${t} días seguidos (o casi).`),
-    ...makeMilestones('kcal', '🔥', 'kcal', [500,1000,2500,5000,10000], 'totalKcal',
-      t => `${t} kcal quemadas`, t => `Quema ${t} kcal en total remando.`),
-    ...makeMilestones('records', '🏆', 'récords', [1,3,5,10,20], 'recordCount',
-      t => t === 1 ? 'Primer récord personal' : `${t} récords personales`, t => `Supera tu propia marca ${t} veces.`),
-    ...makeMilestones('level', '⭐', 'nivel', [5,10,25,50], 'level',
-      t => `Nivel ${t}`, t => `Alcanza el nivel ${t} de remero.`),
-    {
-      id: 'sprint_cadence', icon: '⚡', title: 'Ritmo de sprint', desc: 'Completa una sesión con una cadencia media de 30 spm o más.',
-      check: s => ({ unlocked: s.maxSpm >= 30, progress: Math.min(1, s.maxSpm/30), progressText: `${Math.round(s.maxSpm)} / 30 spm` })
-    },
-    {
-      id: 'steady_cadence', icon: '🧘', title: 'Cadencia constante', desc: 'Completa una sesión con una cadencia media de 18 spm o menos.',
-      check: s => ({ unlocked: s.hasLowSpmSession, progress: s.hasLowSpmSession ? 1 : 0, progressText: s.hasLowSpmSession ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'early_bird', icon: '🌅', title: 'Madrugador', desc: 'Entrena antes de las 8:00.',
-      check: s => ({ unlocked: s.earlyCount >= 1, progress: Math.min(1, s.earlyCount), progressText: s.earlyCount >= 1 ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'night_owl', icon: '🌙', title: 'Búho nocturno', desc: 'Entrena entre las 22:00 y las 5:00.',
-      check: s => ({ unlocked: s.nightCount >= 1, progress: Math.min(1, s.nightCount), progressText: s.nightCount >= 1 ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'weekend_warrior', icon: '📅', title: 'Guerrero de fin de semana', desc: 'Entrena en sábado o domingo.',
-      check: s => ({ unlocked: s.weekendCount >= 1, progress: Math.min(1, s.weekendCount), progressText: s.weekendCount >= 1 ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'world_explorer', icon: '🌍', title: 'Explorador del mundo', desc: 'Completa las 8 rutas del mundo al menos una vez cada una.',
-      check: s => ({ unlocked: s.routeNames.size >= 8, progress: Math.min(1, s.routeNames.size/8), progressText: `${s.routeNames.size} / 8 rutas` })
-    },
-    {
-      id: 'weather_dawn', icon: '🌅', title: 'Bajo el amanecer', desc: 'Rema con el clima de Amanecer (función Premium).',
-      check: s => ({ unlocked: s.weathersUsed.has('dawn'), progress: s.weathersUsed.has('dawn') ? 1 : 0, progressText: s.weathersUsed.has('dawn') ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'weather_dusk', icon: '🌇', title: 'Bajo el atardecer', desc: 'Rema con el clima de Atardecer (función Premium).',
-      check: s => ({ unlocked: s.weathersUsed.has('dusk'), progress: s.weathersUsed.has('dusk') ? 1 : 0, progressText: s.weathersUsed.has('dusk') ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'custom_creator', icon: '🛠️', title: 'Diseñador de entrenamientos', desc: 'Crea tu primera rutina personalizada (función Premium).',
-      check: s => ({ unlocked: s.customRoutesCount >= 1, progress: Math.min(1, s.customRoutesCount), progressText: s.customRoutesCount >= 1 ? 'Conseguido' : 'Pendiente' })
-    },
-    {
-      id: 'full_route_finisher', icon: '✅', title: 'Sin abandonar', desc: 'Completa una ruta entera, sin guardarla a medias.',
-      check: s => ({ unlocked: s.hasFullCompletion, progress: s.hasFullCompletion ? 1 : 0, progressText: s.hasFullCompletion ? 'Conseguido' : 'Pendiente' })
-    }
-  ];
+  function getAchievements() {
+    const isEn = lang === 'en';
+    return [
+      ...makeMilestones('dist', '🌊', 'km', [1,5,10,25,50,100,250,500], 'totalKm',
+        n => isEn ? `${n} km rowed` : `${n} km recorridos`,
+        n => isEn ? `Accumulate ${n} km rowed in total.` : `Suma ${n} km remados en total.`),
+      ...makeMilestones('time', '⏱️', 'h', [1,5,10,25,50,100], 'totalHours',
+        n => isEn ? `${n} hours rowing` : `${n} horas remando`,
+        n => isEn ? `Accumulate ${n} hours of rowing in total.` : `Acumula ${n} horas de remo en total.`),
+      ...makeMilestones('sessions', '🚣', isEn ? 'sessions' : 'sesiones', [1,5,10,25,50,100,250], 'totalSessions',
+        n => n === 1 ? (isEn ? 'First workout' : 'Primer entrenamiento') : (isEn ? `${n} workouts` : `${n} entrenamientos`),
+        n => isEn ? `Complete ${n} rowing sessions.` : `Completa ${n} sesiones de remo.`),
+      ...makeMilestones('streak', '🔥', isEn ? 'days' : 'días', [3,7,14,30,60,100], 'bestStreak',
+        n => isEn ? `${n}-day streak` : `Racha de ${n} días`,
+        n => isEn ? `Train ${n} days in a row (or close to it).` : `Entrena ${n} días seguidos (o casi).`),
+      ...makeMilestones('kcal', '🔥', 'kcal', [500,1000,2500,5000,10000], 'totalKcal',
+        n => isEn ? `${n} kcal burned` : `${n} kcal quemadas`,
+        n => isEn ? `Burn ${n} kcal total while rowing.` : `Quema ${n} kcal en total remando.`),
+      ...makeMilestones('records', '🏆', isEn ? 'records' : 'récords', [1,3,5,10,20], 'recordCount',
+        n => n === 1 ? (isEn ? 'First personal record' : 'Primer récord personal') : (isEn ? `${n} personal records` : `${n} récords personales`),
+        n => isEn ? `Beat your own record ${n} times.` : `Supera tu propia marca ${n} veces.`),
+      ...makeMilestones('level', '⭐', isEn ? 'level' : 'nivel', [5,10,25,50], 'level',
+        n => isEn ? `Level ${n}` : `Nivel ${n}`,
+        n => isEn ? `Reach rowing level ${n}.` : `Alcanza el nivel ${n} de remero.`),
+      {
+        id: 'sprint_cadence', icon: '⚡',
+        title: isEn ? 'Sprint cadence' : 'Ritmo de sprint',
+        desc: isEn ? 'Complete a session with an average cadence of 30 spm or more.' : 'Completa una sesión con una cadencia media de 30 spm o más.',
+        check: s => ({ unlocked: s.maxSpm >= 30, progress: Math.min(1, s.maxSpm/30), progressText: `${Math.round(s.maxSpm)} / 30 spm` })
+      },
+      {
+        id: 'steady_cadence', icon: '🧘',
+        title: isEn ? 'Steady cadence' : 'Cadencia constante',
+        desc: isEn ? 'Complete a session with an average cadence of 18 spm or less.' : 'Completa una sesión con una cadencia media de 18 spm o menos.',
+        check: s => ({ unlocked: s.hasLowSpmSession, progress: s.hasLowSpmSession ? 1 : 0, progressText: s.hasLowSpmSession ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'early_bird', icon: '🌅',
+        title: isEn ? 'Early bird' : 'Madrugador',
+        desc: isEn ? 'Train before 8:00.' : 'Entrena antes de las 8:00.',
+        check: s => ({ unlocked: s.earlyCount >= 1, progress: Math.min(1, s.earlyCount), progressText: s.earlyCount >= 1 ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'night_owl', icon: '🌙',
+        title: isEn ? 'Night owl' : 'Búho nocturno',
+        desc: isEn ? 'Train between 22:00 and 5:00.' : 'Entrena entre las 22:00 y las 5:00.',
+        check: s => ({ unlocked: s.nightCount >= 1, progress: Math.min(1, s.nightCount), progressText: s.nightCount >= 1 ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'weekend_warrior', icon: '📅',
+        title: isEn ? 'Weekend warrior' : 'Guerrero de fin de semana',
+        desc: isEn ? 'Train on Saturday or Sunday.' : 'Entrena en sábado o domingo.',
+        check: s => ({ unlocked: s.weekendCount >= 1, progress: Math.min(1, s.weekendCount), progressText: s.weekendCount >= 1 ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'world_explorer', icon: '🌍',
+        title: isEn ? 'World explorer' : 'Explorador del mundo',
+        desc: isEn ? 'Complete all 8 world routes at least once each.' : 'Completa las 8 rutas del mundo al menos una vez cada una.',
+        check: s => ({ unlocked: s.routeNames.size >= 8, progress: Math.min(1, s.routeNames.size/8), progressText: `${s.routeNames.size} / 8 ${isEn ? 'routes' : 'rutas'}` })
+      },
+      {
+        id: 'weather_dawn', icon: '🌅',
+        title: isEn ? 'Under the dawn' : 'Bajo el amanecer',
+        desc: isEn ? 'Row with the Dawn weather (Premium feature).' : 'Rema con el clima de Amanecer (función Premium).',
+        check: s => ({ unlocked: s.weathersUsed.has('dawn'), progress: s.weathersUsed.has('dawn') ? 1 : 0, progressText: s.weathersUsed.has('dawn') ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'weather_dusk', icon: '🌇',
+        title: isEn ? 'Under the dusk' : 'Bajo el atardecer',
+        desc: isEn ? 'Row with the Dusk weather (Premium feature).' : 'Rema con el clima de Atardecer (función Premium).',
+        check: s => ({ unlocked: s.weathersUsed.has('dusk'), progress: s.weathersUsed.has('dusk') ? 1 : 0, progressText: s.weathersUsed.has('dusk') ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'custom_creator', icon: '🛠️',
+        title: isEn ? 'Workout designer' : 'Diseñador de entrenamientos',
+        desc: isEn ? 'Create your first custom routine (Premium feature).' : 'Crea tu primera rutina personalizada (función Premium).',
+        check: s => ({ unlocked: s.customRoutesCount >= 1, progress: Math.min(1, s.customRoutesCount), progressText: s.customRoutesCount >= 1 ? t('ach_done') : t('ach_pending') })
+      },
+      {
+        id: 'full_route_finisher', icon: '✅',
+        title: isEn ? 'No quitting' : 'Sin abandonar',
+        desc: isEn ? 'Complete a full route, without saving it halfway.' : 'Completa una ruta entera, sin guardarla a medias.',
+        check: s => ({ unlocked: s.hasFullCompletion, progress: s.hasFullCompletion ? 1 : 0, progressText: s.hasFullCompletion ? t('ach_done') : t('ach_pending') })
+      }
+    ];
+  }
+  let ACHIEVEMENTS = getAchievements();
 
   // ---- Daily missions ----
-  const MISSION_POOL = [
-    { id: 'min15', text: 'Rema 15 minutos', xp: 20, check: (todaySessions) => todaySessions.reduce((a,h)=>a+h.durationSeconds,0) >= 15*60 },
-    { id: 'min25', text: 'Rema 25 minutos', xp: 30, check: (todaySessions) => todaySessions.reduce((a,h)=>a+h.durationSeconds,0) >= 25*60 },
-    { id: 'spm24', text: 'Mantén 24 spm de media en una sesión', xp: 20, check: (todaySessions) => todaySessions.some(h => h.avgSpm >= 24) },
-    { id: 'spm20', text: 'Mantén 20 spm de media en una sesión', xp: 15, check: (todaySessions) => todaySessions.some(h => h.avgSpm >= 20) },
-    { id: 'route1', text: 'Completa una ruta entera', xp: 25, check: (todaySessions) => todaySessions.some(h => h.type === 'Ruta' && h.completed !== false) },
-    { id: 'two_sessions', text: 'Entrena dos veces hoy', xp: 25, check: (todaySessions) => todaySessions.length >= 2 },
-    { id: 'dist2', text: 'Rema al menos 2 km', xp: 20, check: (todaySessions) => todaySessions.reduce((a,h)=>a+(h.distanceKm||0),0) >= 2 }
-  ];
+  function getMissionPool() {
+    return [
+      { id: 'min15',        text: t('mission_min15'),        xp: 20, check: (todaySessions) => todaySessions.reduce((a,h)=>a+h.durationSeconds,0) >= 15*60 },
+      { id: 'min25',        text: t('mission_min25'),        xp: 30, check: (todaySessions) => todaySessions.reduce((a,h)=>a+h.durationSeconds,0) >= 25*60 },
+      { id: 'spm24',        text: t('mission_spm24'),        xp: 20, check: (todaySessions) => todaySessions.some(h => h.avgSpm >= 24) },
+      { id: 'spm20',        text: t('mission_spm20'),        xp: 15, check: (todaySessions) => todaySessions.some(h => h.avgSpm >= 20) },
+      { id: 'route1',       text: t('mission_route1'),       xp: 25, check: (todaySessions) => todaySessions.some(h => h.type === 'Ruta' && h.completed !== false) },
+      { id: 'two_sessions', text: t('mission_two_sessions'), xp: 25, check: (todaySessions) => todaySessions.length >= 2 },
+      { id: 'dist2',        text: t('mission_dist2'),        xp: 20, check: (todaySessions) => todaySessions.reduce((a,h)=>a+(h.distanceKm||0),0) >= 2 }
+    ];
+  }
+  let MISSION_POOL = getMissionPool();
   function pickDailyMissions() {
     const dateStr = new Date().toDateString();
     let seed = 0;
@@ -2418,7 +2712,7 @@ if (!window.storage) {
     const { entry, xpGained, levelBefore, levelAfter, xpIntoLevel, xpForLevel, streakCurrent, newAchievements, isRecord, previousBest } = info;
 
     document.getElementById('summaryXpBadge').textContent = `+${xpGained} XP`;
-    document.getElementById('summaryLevelNum').textContent = `Nivel ${levelAfter}`;
+    document.getElementById('summaryLevelNum').textContent = `${t('level_prefix')}${levelAfter}`;
     document.getElementById('summaryLevelBarFill').style.width = Math.round((xpIntoLevel/xpForLevel)*100) + '%';
     document.getElementById('summaryLevelXpText').textContent = `${xpIntoLevel} / ${xpForLevel} XP`;
 
@@ -2426,33 +2720,34 @@ if (!window.storage) {
     document.getElementById('summaryStatsRow').innerHTML = `
       <div class="summary-stat"><div class="ss-val">${minutes}</div><div class="ss-label">min</div></div>
       <div class="summary-stat"><div class="ss-val">${entry.distanceKm != null ? entry.distanceKm : '—'}</div><div class="ss-label">km</div></div>
-      <div class="summary-stat"><div class="ss-val">${entry.avgSpm}</div><div class="ss-label">spm medio</div></div>
+      <div class="summary-stat"><div class="ss-val">${entry.avgSpm}</div><div class="ss-label">${t('summary_avg_spm')}</div></div>
       <div class="summary-stat"><div class="ss-val">${entry.calories != null ? entry.calories : '—'}</div><div class="ss-label">kcal</div></div>
     `;
 
     const streakRow = document.getElementById('summaryStreakRow');
-    streakRow.innerHTML = streakCurrent >= 2 ? `${icon('flame',{size:16})} <b>${streakCurrent} días seguidos</b> — ¡sigue así!` : '';
+    streakRow.innerHTML = streakCurrent >= 2 ? `${icon('flame',{size:16})} <b>${T[lang].streak_days(streakCurrent)}</b>` : '';
 
     const recordRow = document.getElementById('summaryRecordRow');
     if (isRecord) {
       const diff = Math.round((entry.distanceKm - previousBest) * 100) / 100;
-      recordRow.innerHTML = `<div class="summary-record-box">${icon('trophy',{size:16})} <b>¡Nuevo récord!</b> De ${previousBest} km subiste a ${entry.distanceKm} km (+${diff} km) en el mismo tiempo de siempre.</div>`;
+      recordRow.innerHTML = `<div class="summary-record-box">${icon('trophy',{size:16})} ${T[lang].record_text(previousBest, entry.distanceKm, diff)}</div>`;
     } else if (levelAfter > levelBefore) {
-      recordRow.innerHTML = `<div class="summary-record-box"><b>¡Subiste al nivel ${levelAfter}!</b></div>`;
+      recordRow.innerHTML = `<div class="summary-record-box"><b>${T[lang].levelup_text(levelAfter)}</b></div>`;
     } else {
       recordRow.innerHTML = '';
     }
 
     const achBlock = document.getElementById('summaryAchievementsBlock');
     if (newAchievements.length > 0) {
-      achBlock.innerHTML = `<div class="summary-section-label">Logros desbloqueados</div>` +
+      achBlock.innerHTML = `<div class="summary-section-label">${t('new_achievements_label')}</div>` +
         newAchievements.map(a => `<div class="summary-ach-item"><span class="sa-icon">${a.icon}</span><div><div class="sa-title">${a.title}</div><div class="sa-desc">${a.desc}</div></div></div>`).join('');
     } else {
       achBlock.innerHTML = '';
     }
 
     document.getElementById('summaryShareBtn').onclick = async () => {
-      const shareText = `🚣 Acabo de completar "${entry.routeName}" — ${minutes} min, ${entry.avgSpm} spm medio${entry.distanceKm != null ? `, ${entry.distanceKm} km` : ''}. ¡Nivel ${levelAfter} en Remo! 💪`;
+      const distText = entry.distanceKm != null ? T[lang].dist_km(entry.distanceKm) : '';
+      const shareText = T[lang].share_text_fn(entry.routeName, minutes, entry.avgSpm, distText, levelAfter);
       if (navigator.share) {
         try { await navigator.share({ text: shareText }); } catch (e) { /* user cancelled, ignore */ }
       } else {
@@ -2460,7 +2755,7 @@ if (!window.storage) {
           await navigator.clipboard.writeText(shareText);
           const btn = document.getElementById('summaryShareBtn');
           const original = btn.textContent;
-          btn.textContent = 'Copiado al portapapeles';
+          btn.textContent = t('copied');
           setTimeout(() => { btn.textContent = original; }, 2000);
         } catch (e) { /* clipboard unavailable, silently ignore */ }
       }
@@ -2482,9 +2777,9 @@ if (!window.storage) {
   function openCompletionModal(session) {
     pendingSession = session;
     const mins = Math.round(session.durationSeconds / 60 * 10) / 10;
-    let summary = `${session.routeName} · ${mins} min · ${session.avgSpm} spm medio`;
+    let summary = `${session.routeName} · ${mins} min · ${session.avgSpm} ${t('summary_avg_spm')}`;
     if (session.type === 'Ruta' && session.completed === false) {
-      summary += ` · ruta al ${session.percentDone}% (no cuenta para récords)`;
+      summary += T[lang].modal_partial(session.percentDone);
     }
     modalSummary.textContent = summary;
     inputDistance.value = ''; inputCalories.value = '';
@@ -2526,9 +2821,9 @@ if (!window.storage) {
     };
 
     const btn = document.getElementById('confirmSaveBtn');
-    btn.textContent = 'Guardando…'; btn.disabled = true;
+    btn.textContent = t('saving_state'); btn.disabled = true;
     await appendHistoryEntry(entry);
-    btn.textContent = 'Guardar'; btn.disabled = false;
+    btn.textContent = t('modal_save'); btn.disabled = false;
     closeCompletionModal();
 
     // Snapshot AFTER, to see exactly what changed with this one session.
@@ -2560,7 +2855,8 @@ if (!window.storage) {
   // ---------- PROGRESS TAB ----------
   function formatDate(iso) {
     const d = new Date(iso);
-    return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    const locale = t('date_locale');
+    return d.toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
   }
 
   // ---------- HOME ----------
@@ -2584,7 +2880,7 @@ if (!window.storage) {
     const todaySessions = hist.filter(h => h.completed !== false && new Date(h.date).toDateString() === todayStr);
     const missions = pickDailyMissions();
     wrap.innerHTML = `
-      <div class="hmc-title">Misiones de hoy</div>
+      <div class="hmc-title">${t('missions_today')}</div>
       ${missions.map(m => {
         const done = m.check(todaySessions);
         return `<div class="hmc-item"><span class="hmc-check">${done ? icon('check',{size:15,cls:'ic-done'}) : icon('circle',{size:15,cls:'ic-todo'})}</span><span>${m.text}</span><span class="hmc-xp">+${m.xp} XP</span></div>`;
@@ -2605,19 +2901,19 @@ if (!window.storage) {
 
     levelWrap.innerHTML = `
       <div class="home-level-card">
-        <div class="hlc-level-badge">Nv.${level}</div>
+        <div class="hlc-level-badge">${t('level_prefix')}${level}</div>
         <div class="hlc-info">
           <div class="hlc-title">${xpIntoLevel} / ${xpForLevel} XP</div>
           <div class="level-bar-track"><div class="level-bar-fill" style="width:${Math.round((xpIntoLevel/xpForLevel)*100)}%;"></div></div>
         </div>
-        ${streaks.current >= 1 ? `<div class="hlc-streak">${icon('flame',{size:14})} ${streaks.current} día${streaks.current === 1 ? '' : 's'}</div>` : ''}
+        ${streaks.current >= 1 ? `<div class="hlc-streak">${icon('flame',{size:14})} ${T[lang].streak_days(streaks.current)}</div>` : ''}
       </div>`;
 
     await renderDailyMissions(hist);
 
     if (hist.length === 0) {
-      wrap.innerHTML = `<div class="home-invite">Aún no has entrenado nada — dale a "Empezar entrenamiento" para tu primera sesión.</div>`;
-      finalCta.textContent = 'Comienza tu primer entrenamiento';
+      wrap.innerHTML = `<div class="home-invite">${t('no_sessions_yet')}</div>`;
+      finalCta.textContent = t('btn_first_cta');
       return;
     }
 
@@ -2628,12 +2924,12 @@ if (!window.storage) {
 
     wrap.innerHTML = `
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-value">${totalSessions}</div><div class="stat-label">Sesiones realizadas</div></div>
-        <div class="stat-card"><div class="stat-value">${totalMinutes}</div><div class="stat-label">Minutos remados</div></div>
-        <div class="stat-card"><div class="stat-value">${bestStreak}</div><div class="stat-label">Mejor racha (días)</div></div>
-        <div class="stat-card"><div class="stat-value">${avgSpm}</div><div class="stat-label">Cadencia media (spm)</div></div>
+        <div class="stat-card"><div class="stat-value">${totalSessions}</div><div class="stat-label">${t('stat_sessions')}</div></div>
+        <div class="stat-card"><div class="stat-value">${totalMinutes}</div><div class="stat-label">${t('stat_minutes')}</div></div>
+        <div class="stat-card"><div class="stat-value">${bestStreak}</div><div class="stat-label">${t('stat_best_streak')}</div></div>
+        <div class="stat-card"><div class="stat-value">${avgSpm}</div><div class="stat-label">${t('stat_avg_spm')}</div></div>
       </div>`;
-    finalCta.textContent = 'Empieza tu próximo entrenamiento';
+    finalCta.textContent = t('btn_next_cta');
   }
 
   document.getElementById('homeStartBtn').addEventListener('click', () => { showPanel('routine'); });
@@ -2648,12 +2944,12 @@ if (!window.storage) {
     const streaks = computeStreaks(hist);
     document.getElementById('progressLevelSection').innerHTML = `
       <div class="home-level-card">
-        <div class="hlc-level-badge">Nv.${level}</div>
+        <div class="hlc-level-badge">${t('level_prefix')}${level}</div>
         <div class="hlc-info">
           <div class="hlc-title">${xpIntoLevel} / ${xpForLevel} XP</div>
           <div class="level-bar-track"><div class="level-bar-fill" style="width:${Math.round((xpIntoLevel/xpForLevel)*100)}%;"></div></div>
         </div>
-        ${streaks.current >= 1 ? `<div class="hlc-streak">${icon('flame',{size:14})} ${streaks.current} día${streaks.current === 1 ? '' : 's'}</div>` : ''}
+        ${streaks.current >= 1 ? `<div class="hlc-streak">${icon('flame',{size:14})} ${T[lang].streak_days(streaks.current)}</div>` : ''}
       </div>`;
   }
 
@@ -2663,9 +2959,9 @@ if (!window.storage) {
     const km = weekSessions.reduce((a,h) => a + (h.distanceKm || 0), 0);
     const sessions = weekSessions.length;
     const goals = [
-      { label: 'Minutos', value: Math.round(minutes), target: WEEKLY_GOALS.minutes, unit: 'min' },
-      { label: 'Distancia', value: Math.round(km*10)/10, target: WEEKLY_GOALS.km, unit: 'km' },
-      { label: 'Entrenamientos', value: sessions, target: WEEKLY_GOALS.sessions, unit: '' }
+      { label: t('weekly_minutes'),   value: Math.round(minutes),    target: WEEKLY_GOALS.minutes,  unit: 'min' },
+      { label: t('weekly_distance'),  value: Math.round(km*10)/10,   target: WEEKLY_GOALS.km,       unit: 'km' },
+      { label: t('weekly_workouts'),  value: sessions,               target: WEEKLY_GOALS.sessions, unit: '' }
     ];
     document.getElementById('weeklyGoalsSection').innerHTML = goals.map(g => {
       const pct = Math.min(100, Math.round((g.value/g.target)*100));
@@ -2682,10 +2978,10 @@ if (!window.storage) {
     const days = computeCalendarData(hist);
     document.getElementById('calendarHeatmapSection').innerHTML = `
       <div class="calendar-heatmap">
-        ${days.map(d => `<div class="cal-day${d.level > 0 ? ' lvl'+d.level : ''}" title="${d.date.toLocaleDateString('es-ES')}"></div>`).join('')}
+        ${days.map(d => `<div class="cal-day${d.level > 0 ? ' lvl'+d.level : ''}" title="${d.date.toLocaleDateString(t('date_locale'))}"></div>`).join('')}
       </div>
       <div class="calendar-legend">
-        Menos <div class="cal-day"></div><div class="cal-day lvl1"></div><div class="cal-day lvl2"></div><div class="cal-day lvl3"></div><div class="cal-day lvl4"></div> Más
+        ${t('cal_less')} <div class="cal-day"></div><div class="cal-day lvl1"></div><div class="cal-day lvl2"></div><div class="cal-day lvl3"></div><div class="cal-day lvl4"></div> ${t('cal_more')}
       </div>`;
   }
 
@@ -2693,17 +2989,17 @@ if (!window.storage) {
     const wrap = document.getElementById('monthlyComparisonSection');
     const c = computeMonthlyComparison(hist);
     if (c.sessionsThis === 0 && c.sessionsLast === 0) {
-      wrap.innerHTML = `<div class="empty-state">Entrena un par de meses para empezar a ver comparativas contigo mismo.</div>`;
+      wrap.innerHTML = `<div class="empty-state">${t('comparison_empty')}</div>`;
       return;
     }
     const lines = [];
     if (c.kmLast > 0 || c.kmThis > 0) {
-      lines.push(`Este mes remas un <b>${c.kmPct >= 0 ? '+' : ''}${c.kmPct}%</b> ${c.kmPct >= 0 ? 'más' : 'menos'} de distancia que el mes pasado.`);
+      lines.push(T[lang].cmp_km(c.kmPct));
     }
     if (c.spmLast > 0) {
-      lines.push(`Has ${c.spmPct >= 0 ? 'mejorado' : 'bajado'} tu cadencia media un <b>${Math.abs(c.spmPct)}%</b> respecto al mes pasado.`);
+      lines.push(T[lang].cmp_spm(c.spmPct));
     }
-    lines.push(`Has entrenado <b>${c.sessionsThis}</b> ${c.sessionsThis === 1 ? 'vez' : 'veces'} este mes, frente a <b>${c.sessionsLast}</b> el mes pasado.`);
+    lines.push(T[lang].cmp_sessions(c.sessionsThis, c.sessionsLast));
     wrap.innerHTML = `<div class="monthly-comparison-list">${lines.map(l => `<div class="mc-item">${l}</div>`).join('')}</div>`;
   }
 
@@ -2745,14 +3041,14 @@ if (!window.storage) {
   async function renderProgress() {
     const statsGrid = document.getElementById('statsGrid');
     const historyList = document.getElementById('historyList');
-    statsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">Cargando…</div>`;
+    statsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${t('loading')}</div>`;
     historyList.innerHTML = '';
 
     let hist;
     try {
       hist = await loadHistory();
     } catch (e) {
-      statsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">No se pudo cargar el historial.</div>`;
+      statsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${t('history_load_error')}</div>`;
       return;
     }
 
@@ -2768,17 +3064,17 @@ if (!window.storage) {
     const totalCalories = Math.round(hist.reduce((a,h)=>a+(h.calories||0),0));
 
     statsGrid.innerHTML = `
-      <div class="stat-card"><div class="stat-value">${totalSessions}</div><div class="stat-label">Entrenamientos</div></div>
-      <div class="stat-card"><div class="stat-value">${totalMinutes}</div><div class="stat-label">Minutos totales</div></div>
-      <div class="stat-card"><div class="stat-value">${totalDistance} km</div><div class="stat-label">Distancia total</div></div>
-      <div class="stat-card"><div class="stat-value">${totalCalories}</div><div class="stat-label">Calorías totales</div></div>
+      <div class="stat-card"><div class="stat-value">${totalSessions}</div><div class="stat-label">${t('stat_workouts')}</div></div>
+      <div class="stat-card"><div class="stat-value">${totalMinutes}</div><div class="stat-label">${t('stat_total_minutes')}</div></div>
+      <div class="stat-card"><div class="stat-value">${totalDistance} km</div><div class="stat-label">${t('stat_total_distance')}</div></div>
+      <div class="stat-card"><div class="stat-value">${totalCalories}</div><div class="stat-label">${t('stat_total_calories')}</div></div>
     `;
 
     const bests = computeRouteBests(hist);
     const bestsList = document.getElementById('personalBestsList');
     const bestEntries = Object.entries(bests);
     if (bestEntries.length === 0) {
-      bestsList.innerHTML = `<div class="empty-state">Aún no tienes marcas guardadas. Registra la distancia al terminar una ruta para empezar a comparar tu rendimiento.</div>`;
+      bestsList.innerHTML = `<div class="empty-state">${t('bests_empty')}</div>`;
     } else {
       bestsList.innerHTML = bestEntries
         .sort((a, b) => new Date(b[1].date) - new Date(a[1].date))
@@ -2791,7 +3087,7 @@ if (!window.storage) {
     }
 
     if (hist.length === 0) {
-      historyList.innerHTML = `<div class="empty-state">Aún no has guardado ningún entrenamiento. ¡Termina uno y regístralo aquí!</div>`;
+      historyList.innerHTML = `<div class="empty-state">${t('history_empty')}</div>`;
       return;
     }
 
@@ -2801,7 +3097,7 @@ if (!window.storage) {
       return `
       <div class="history-item">
         <div class="h-left">
-          <div class="h-route">${isRecord ? icon('trophy',{size:14,cls:'ic-trophy'}) + ' ' : ''}${h.routeName}${isPartial ? ' <span style="color:#c0392b; font-weight:600;">(parcial)</span>' : ''}</div>
+          <div class="h-route">${isRecord ? icon('trophy',{size:14,cls:'ic-trophy'}) + ' ' : ''}${h.routeName}${isPartial ? ` <span style="color:#c0392b; font-weight:600;">${t('partial_label')}</span>` : ''}</div>
           <div class="h-date">${formatDate(h.date)}</div>
         </div>
         <div class="h-right">
@@ -2816,11 +3112,12 @@ if (!window.storage) {
   // ---------- CUSTOMIZATION: skin tone + separate shape/color catalogs for boats and oars ----------
   const SKIN_TONES = ['#ffe0bd', '#f1c27d', '#e0ac69', '#c68642', '#8d5524', '#5c3a21'];
 
-  const BOAT_SHAPES = [
-    { id: 'classic', name: 'Clásico', req: 0,
-      render: (c,s) => `<path d="M 130 320 Q 250 250 370 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/><path d="M 160 320 Q 250 270 340 320 Z" fill="#e2ded6" opacity="0.5"/>` },
-    { id: 'viking', name: 'Vikingo', req: 3,
-      render: (c,s) => `<path d="M 120 320 Q 250 255 380 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
+  function getBoatShapes() {
+    return [
+      { id: 'classic', name: t('boat_classic'), req: 0,
+        render: (c,s) => `<path d="M 130 320 Q 250 250 370 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/><path d="M 160 320 Q 250 270 340 320 Z" fill="#e2ded6" opacity="0.5"/>` },
+      { id: 'viking', name: t('boat_viking'), req: 3,
+        render: (c,s) => `<path d="M 120 320 Q 250 255 380 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
         <path d="M 160 320 Q 250 275 340 320 Z" fill="#d8c9a3" opacity="0.35"/>
         <path d="M 244 296 Q 235 205 241 168 L 250 138 L 259 168 Q 265 205 256 296 Z" fill="${s}"/>
         <path d="M 236 182 L 213 162 L 230 198 Z" fill="${s}"/>
@@ -2831,16 +3128,16 @@ if (!window.storage) {
         <polygon points="250,161 247,146 253,146" fill="#5c3a1e" opacity="0.7"/>
         <rect x="150" y="290" width="34" height="10" rx="2" fill="${s}" opacity="0.6"/>
         <rect x="316" y="290" width="34" height="10" rx="2" fill="${s}" opacity="0.6"/>` },
-    { id: 'kayak', name: 'Kayak', req: 6,
-      render: (c,s) => `<path d="M 175 320 Q 250 232 325 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/><path d="M 198 320 Q 250 258 302 320 Z" fill="#fff4d9" opacity="0.35"/>` },
-    { id: 'gondola', name: 'Góndola', req: 10,
-      render: (c,s) => `<path d="M 120 320 Q 250 260 380 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
+      { id: 'kayak', name: t('boat_kayak'), req: 6,
+        render: (c,s) => `<path d="M 175 320 Q 250 232 325 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/><path d="M 198 320 Q 250 258 302 320 Z" fill="#fff4d9" opacity="0.35"/>` },
+      { id: 'gondola', name: t('boat_gondola'), req: 10,
+        render: (c,s) => `<path d="M 120 320 Q 250 260 380 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
         <path d="M 160 320 Q 250 278 340 320 Z" fill="#4a4a4f" opacity="0.4"/>
         <path d="M 240 292 L 245 260 L 253 260 L 258 292 Z" fill="${s}"/>
         <path d="M 245 260 Q 233 215 253 178 Q 268 205 260 232 Q 254 248 245 260 Z" fill="${s}"/>
         <rect x="247" y="170" width="10" height="16" fill="${s}"/>` },
-    { id: 'dragon', name: 'Bote Dragón', req: 15,
-      render: (c,s) => `<path d="M 110 320 Q 250 250 390 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
+      { id: 'dragon', name: t('boat_dragon'), req: 15,
+        render: (c,s) => `<path d="M 110 320 Q 250 250 390 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
         <path d="M 150 320 Q 250 270 350 320 Z" fill="#ffd27a" opacity="0.35"/>
         <path d="M 208 296 Q 198 200 208 168 L 250 128 L 292 168 Q 302 200 292 296 Z" fill="${c}"/>
         <path d="M 222 168 L 202 136 L 231 158 Z" fill="${s}"/>
@@ -2849,36 +3146,50 @@ if (!window.storage) {
         <polygon points="250,214 243,192 257,192" fill="${s}"/>
         <polygon points="250,182 244,163 256,163" fill="${s}"/>
         <polygon points="250,151 246,136 254,136" fill="${s}"/>` },
-    { id: 'ornate', name: 'Ceremonial', req: 20,
-      render: (c,s) => `<path d="M 130 320 Q 250 250 370 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
+      { id: 'ornate', name: t('boat_ornate'), req: 20,
+        render: (c,s) => `<path d="M 130 320 Q 250 250 370 320 Z" fill="${c}" stroke="${s}" stroke-width="3"/>
         <path d="M 160 320 Q 250 270 340 320 Z" fill="#fff7d6" opacity="0.55"/>
         <path d="M 195 292 Q 250 268 305 292" stroke="#fff2b0" stroke-width="3" fill="none"/>
         <circle cx="250" cy="282" r="7" fill="#fff2b0"/>` }
-  ];
-  const BOAT_COLORS = [
-    { id: 'red',    name: 'Rojo',      req: 0,  hex: '#c94b3f' },
-    { id: 'ocean',  name: 'Océano',    req: 2,  hex: '#2f6f9e' },
-    { id: 'forest', name: 'Bosque',    req: 4,  hex: '#3f7d4a' },
-    { id: 'sunset', name: 'Atardecer', req: 6,  hex: '#e08a3c' },
-    { id: 'carbon', name: 'Carbono',   req: 8,  hex: '#3a3a3f' },
-    { id: 'gold',   name: 'Oro',       req: 12, hex: '#d4af37' }
-  ];
-  const OAR_SHAPES = [
-    { id: 'spoon',  name: 'Clásica',   req: 0,
-      blade: (c,s) => `<path d="M0,-8 Q18,-14 26,0 Q18,14 0,8 Z" fill="${c}" stroke="${s}" stroke-width="1.5"/>` },
-    { id: 'round',  name: 'Redonda',   req: 3,
-      blade: (c,s) => `<circle cx="14" cy="0" r="13" fill="${c}" stroke="${s}" stroke-width="1.5"/><path d="M2,-9 L2,9 M14,-13 L14,13" stroke="${s}" stroke-width="1"/>` },
-    { id: 'hatchet',name: 'Hacha',     req: 6,
-      blade: (c,s) => `<path d="M0,-7 L22,-9 L27,0 L22,9 L0,7 Z" fill="${c}" stroke="${s}" stroke-width="1.5"/>` },
-  ];
-  const OAR_COLORS = [
-    { id: 'wood',   name: 'Madera',  req: 0,  hex: '#7a4a1e' },
-    { id: 'red',    name: 'Rojo',    req: 2,  hex: '#c0392b' },
-    { id: 'carbon', name: 'Carbono', req: 4,  hex: '#2b2b2e' },
-    { id: 'white',  name: 'Blanco',  req: 6,  hex: '#e8e6e0' },
-    { id: 'neon',   name: 'Neón',    req: 8,  hex: '#39d98a' },
-    { id: 'gold',   name: 'Oro',     req: 12, hex: '#d4af37' }
-  ];
+    ];
+  }
+  let BOAT_SHAPES = getBoatShapes();
+
+  function getBoatColors() {
+    return [
+      { id: 'red',    name: t('color_red'),    req: 0,  hex: '#c94b3f' },
+      { id: 'ocean',  name: t('color_ocean'),  req: 2,  hex: '#2f6f9e' },
+      { id: 'forest', name: t('color_forest'), req: 4,  hex: '#3f7d4a' },
+      { id: 'sunset', name: t('color_sunset'), req: 6,  hex: '#e08a3c' },
+      { id: 'carbon', name: t('color_carbon'), req: 8,  hex: '#3a3a3f' },
+      { id: 'gold',   name: t('color_gold'),   req: 12, hex: '#d4af37' }
+    ];
+  }
+  let BOAT_COLORS = getBoatColors();
+
+  function getOarShapes() {
+    return [
+      { id: 'spoon',   name: t('oar_spoon'),   req: 0,
+        blade: (c,s) => `<path d="M0,-8 Q18,-14 26,0 Q18,14 0,8 Z" fill="${c}" stroke="${s}" stroke-width="1.5"/>` },
+      { id: 'round',   name: t('oar_round'),   req: 3,
+        blade: (c,s) => `<circle cx="14" cy="0" r="13" fill="${c}" stroke="${s}" stroke-width="1.5"/><path d="M2,-9 L2,9 M14,-13 L14,13" stroke="${s}" stroke-width="1"/>` },
+      { id: 'hatchet', name: t('oar_hatchet'), req: 6,
+        blade: (c,s) => `<path d="M0,-7 L22,-9 L27,0 L22,9 L0,7 Z" fill="${c}" stroke="${s}" stroke-width="1.5"/>` },
+    ];
+  }
+  let OAR_SHAPES = getOarShapes();
+
+  function getOarColors() {
+    return [
+      { id: 'wood',   name: t('oar_wood'),    req: 0,  hex: '#7a4a1e' },
+      { id: 'red',    name: t('color_red'),   req: 2,  hex: '#c0392b' },
+      { id: 'carbon', name: t('color_carbon'),req: 4,  hex: '#2b2b2e' },
+      { id: 'white',  name: t('color_white'), req: 6,  hex: '#e8e6e0' },
+      { id: 'neon',   name: t('oar_neon'),    req: 8,  hex: '#39d98a' },
+      { id: 'gold',   name: t('color_gold'),  req: 12, hex: '#d4af37' }
+    ];
+  }
+  let OAR_COLORS = getOarColors();
 
   let skinColor = SKIN_TONES[2];
   let selectedBoatShapeId = 'classic', selectedBoatColorId = 'red';
@@ -3139,7 +3450,7 @@ if (!window.storage) {
         ${!isUnlocked ? `<span class="item-lock">${icon('lock',{size:12})}</span>` : ''}
         <svg class="item-shape-preview" viewBox="${viewBox}">${previewFn(item, '#9aa0a6', '#5f6368')}</svg>
         <div class="item-name">${item.name}</div>
-        <div class="item-req">${isUnlocked ? (item.req === 0 ? 'Inicial' : 'Desbloqueado') : `Nivel ${item.req}`}</div>
+        <div class="item-req">${isUnlocked ? (item.req === 0 ? t('item_initial') : t('item_unlocked')) : `${t('level_prefix')}${item.req}`}</div>
       `;
       if (isUnlocked) card.addEventListener('click', () => { onSelect(item.id); renderCustomization(); savePreferences(); });
       wrap.appendChild(card);
@@ -3156,7 +3467,7 @@ if (!window.storage) {
         ${!isUnlocked ? `<span class="item-lock">${icon('lock',{size:12})}</span>` : ''}
         <div class="item-swatch" style="background:${item.hex};"></div>
         <div class="item-name">${item.name}</div>
-        <div class="item-req">${isUnlocked ? (item.req === 0 ? 'Inicial' : 'Desbloqueado') : `Nivel ${item.req}`}</div>
+        <div class="item-req">${isUnlocked ? (item.req === 0 ? t('item_initial') : t('item_unlocked')) : `${t('level_prefix')}${item.req}`}</div>
       `;
       if (isUnlocked) card.addEventListener('click', () => { onSelect(item.id); renderCustomization(); savePreferences(); });
       wrap.appendChild(card);
@@ -3169,7 +3480,7 @@ if (!window.storage) {
     try { hist = await loadHistory(); } catch (e) { hist = []; }
     const playerLevel = computeLevelInfo(computeTotalXP(hist)).level;
     const unlockedCount = playerLevel; // avatar unlocks are level-based, not purchase-based
-    const hintText = devUnlockAll ? '· todo desbloqueado (prueba)' : (isPremium ? `· ${icon('award',{size:12})} todo desbloqueado (Premium)` : `· Nivel ${playerLevel}`);
+    const hintText = devUnlockAll ? t('hint_all_dev') : (isPremium ? `· ${icon('award',{size:12})} ${t('hint_all_premium').replace('· ','')}` : `· ${t('level_prefix')}${playerLevel}`);
     document.getElementById('boatShapeUnlockHint').innerHTML = hintText;
     document.getElementById('boatColorUnlockHint').innerHTML = hintText;
     document.getElementById('oarShapeUnlockHint').innerHTML = hintText;
@@ -3180,10 +3491,13 @@ if (!window.storage) {
     renderColorGallery('oarColorGallery', OAR_COLORS, selectedOarColorId, unlockedCount, (id) => { selectedOarColorId = id; applyOarAppearance(); });
     renderSoundStyleGallery();
   }
-  const SOUND_STYLES = [
-    { id: 'click', name: 'Clic', icon: 'target', premium: false },
-    { id: 'water', name: 'Agua', icon: 'droplet', premium: true }
-  ];
+  function getSoundStyles() {
+    return [
+      { id: 'click', name: t('sound_click'), icon: 'target',  premium: false },
+      { id: 'water', name: t('sound_water'), icon: 'droplet', premium: true }
+    ];
+  }
+  let SOUND_STYLES = getSoundStyles();
   function renderSoundStyleGallery() {
     const wrap = document.getElementById('soundStyleGallery');
     wrap.innerHTML = '';
@@ -3192,7 +3506,7 @@ if (!window.storage) {
       const card = document.createElement('div');
       card.className = 'item-card' + (item.id === soundStyle ? ' selected' : '') + (isLocked ? ' locked' : '');
       const crown = item.premium ? `<span class="item-lock">${icon('award',{size:13})}</span>` : '';
-      card.innerHTML = `${crown}<div style="margin-bottom:4px; display:flex; justify-content:center;">${icon(item.icon,{size:22})}</div><div class="item-name">${item.name}</div><div class="item-req">${item.premium ? (isLocked ? 'Premium' : `${icon('award',{size:11})} Premium`) : 'Incluido'}</div>`;
+      card.innerHTML = `${crown}<div style="margin-bottom:4px; display:flex; justify-content:center;">${icon(item.icon,{size:22})}</div><div class="item-name">${item.name}</div><div class="item-req">${item.premium ? (isLocked ? t('item_premium_label') : `${icon('award',{size:11})} ${t('item_premium_label')}`) : t('item_included')}</div>`;
       card.addEventListener('click', () => {
         if (isLocked) { showPanel('premium'); return; }
         soundStyle = item.id;
@@ -3207,15 +3521,15 @@ if (!window.storage) {
   document.getElementById('testModeToggle').addEventListener('change', (e) => {
     MIN_SAVE_SECONDS = e.target.checked ? 15 : 600;
     document.getElementById('testModeLabel').textContent = e.target.checked
-      ? 'Modo de prueba ACTIVADO: se puede guardar tras 15 segundos'
-      : 'Modo de prueba: guardar tras solo 15s (en vez de 10 min)';
+      ? t('test_mode_on')
+      : t('test_mode_off');
     updateSaveButtons();
   });
   document.getElementById('unlockAllToggle').addEventListener('change', (e) => {
     devUnlockAll = e.target.checked;
     document.getElementById('unlockAllLabel').textContent = e.target.checked
-      ? 'Desbloqueo temporal ACTIVADO (solo para previsualizar)'
-      : 'Desbloquear todas las personalizaciones temporalmente';
+      ? t('unlock_all_on')
+      : t('unlock_all_off');
     renderCustomization();
     renderRouteList();
     renderCustomRoutineSection();
@@ -3224,9 +3538,63 @@ if (!window.storage) {
     applyOarAppearance();
   });
 
+  // ---- i18n: assign applyI18n (exposed to outer scope via let applyI18n) ----
+  applyI18n = function() {
+    // 1. Lang toggle button label
+    const langBtn = document.getElementById('langToggleBtn');
+    if (langBtn) langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+
+    // 2. Static data-i18n attributes
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = t(el.dataset.i18n);
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      el.placeholder = t(el.dataset.i18nPlaceholder);
+    });
+
+    // 3. Reassign all factory arrays so names update in the new language
+    ROUTES = getRoutes();
+    DIFFICULTY_LEVELS = getDifficultyLevels();
+    ACHIEVEMENTS = getAchievements();
+    MISSION_POOL = getMissionPool();
+    BOAT_SHAPES = getBoatShapes();
+    BOAT_COLORS = getBoatColors();
+    OAR_SHAPES = getOarShapes();
+    OAR_COLORS = getOarColors();
+    SOUND_STYLES = getSoundStyles();
+
+    // 4. Sync selectedRoute to updated ROUTES object (find by id for built-in routes)
+    if (selectedRoute && selectedRoute.id) {
+      const updated = ROUTES.find(r => r.id === selectedRoute.id);
+      if (updated) selectedRoute = updated;
+    }
+
+    // 5. JS-controlled button labels
+    const playBtn = document.getElementById('playBtn');
+    if (playBtn) playBtn.textContent = playing ? t('btn_pause') : t('btn_start');
+    const playBtnR = document.getElementById('playBtnR');
+    if (playBtnR) {
+      if (playing) playBtnR.textContent = t('btn_pause');
+      else if (routineInProgress) playBtnR.textContent = t('btn_resume_route');
+      else playBtnR.textContent = t('btn_start_route');
+    }
+    updateSaveButtons();
+
+    // 6. Always re-render the route selector (visible in routine tab)
+    renderRouteList();
+    renderSegPreview();
+    renderWeatherPicker();
+
+    // 7. Re-render the active panel
+    if (mode === 'home') renderHome();
+    else if (mode === 'progress') renderProgress();
+    else if (mode === 'custom') renderCustomization();
+    else if (mode === 'myroutines') renderCustomRoutineSection();
+  };
+
   setPose(0);
   updateSaveButtons();
-  renderHome();
+  applyI18n();
 })();
 </script>
 
