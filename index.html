@@ -533,7 +533,7 @@
 
 <h1><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:5px;"><path d="M12 3v18"/><path d="M7 8l5-3 5 3"/><path d="M4 17c3 2 13 2 16 0"/></svg>Metrónomo de Remo</h1>
 
-<button id="langToggleBtn" onclick="setLang(lang==='es'?'en':'es')" style="position:fixed;top:8px;right:10px;z-index:100;background:rgba(255,255,255,0.92);border:1px solid #eceef1;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:#4b5563;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);">EN</button>
+<button id="langToggleBtn" onclick="setLang(this.textContent.trim()==='EN'?'en':'es')" style="position:fixed;top:8px;right:10px;z-index:100;background:rgba(255,255,255,0.92);border:1px solid #eceef1;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:#4b5563;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);">EN</button>
 
 <div class="tabs">
   <button id="tabHome" class="active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h5v-5h2v5h5v-9"/></svg><span data-i18n="nav_home">Inicio</span></button>
