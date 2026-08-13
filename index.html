@@ -675,9 +675,9 @@
         <circle  id="lockDotR"  r="3"           fill="#6b7280"/>
       </g>
 
-      <!-- forearms: tapered paths, computed each frame in setPose() -->
-      <path id="forearmL" fill="#e8b48a" d="M 0 0"/>
-      <path id="forearmR" fill="#e8b48a" d="M 0 0"/>
+      <!-- forearms: hidden when using photorealistic hand images -->
+      <path id="forearmL" fill="#e8b48a" d="M 0 0" opacity="0"/>
+      <path id="forearmR" fill="#e8b48a" d="M 0 0" opacity="0"/>
 
       <!-- hands: separate files for left and right, each 1086x724 scaled to 80x53 -->
       <g id="handL">
