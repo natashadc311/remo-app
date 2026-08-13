@@ -585,9 +585,6 @@
         <feColorMatrix id="handSkinMatrix" in="grey" type="matrix"
           values="0 0 0 0 0.9098  0 0 0 0 0.7059  0 0 0 0 0.5412  1 1 1 0 0"/>
       </filter>
-      <!-- Clip rects for left/right hand crop (in local hand coordinate space) -->
-      <clipPath id="clipHandL"><rect x="-40" y="-25" width="80" height="53"/></clipPath>
-      <clipPath id="clipHandR"><rect x="-40" y="-25" width="80" height="53"/></clipPath>
     </defs>
 
     <!-- Sky -->
@@ -682,16 +679,12 @@
       <path id="forearmL" fill="#e8b48a" d="M 0 0"/>
       <path id="forearmR" fill="#e8b48a" d="M 0 0"/>
 
-      <!-- hands: clipPath crops each half of the image; 159x53 = image scaled to same aspect ratio -->
+      <!-- hands: separate files for left and right, each 1086x724 scaled to 80x53 -->
       <g id="handL">
-        <g clip-path="url(#clipHandL)">
-          <image href="images/hands/hands male.png" x="-40" y="-25" width="159" height="53" filter="url(#handSkinFilter)"/>
-        </g>
+        <image href="images/hands/hand_left.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
       </g>
       <g id="handR">
-        <g clip-path="url(#clipHandR)">
-          <image href="images/hands/hands male.png" x="-120" y="-25" width="159" height="53" filter="url(#handSkinFilter)"/>
-        </g>
+        <image href="images/hands/hand_right.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
       </g>
     </g>
   </svg>
