@@ -468,6 +468,23 @@
   .skin-swatch:active { transform: scale(0.9); }
   .skin-swatch.selected { border-color: var(--accent); }
 
+  .sleeve-color-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0 4px; justify-content: center;
+  }
+  .sleeve-color-label {
+    font-size: 11px; opacity: 0.55; text-transform: uppercase;
+    letter-spacing: 0.06em; white-space: nowrap;
+  }
+  #freeShirtColors { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .free-shirt-swatch {
+    width: 20px; height: 20px; border-radius: 50%; cursor: pointer; padding: 0;
+    border: 2px solid transparent; transition: transform 0.12s, border-color 0.12s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  .free-shirt-swatch:active { transform: scale(0.85); }
+  .free-shirt-swatch.selected { border-color: var(--accent); }
+
   .custom-section { margin-bottom: var(--space-lg); }
   .custom-section:last-child { margin-bottom: 0; }
   .custom-section-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: var(--space-sm); }
@@ -579,11 +596,40 @@
       </radialGradient>
       <clipPath id="waterClip"><rect x="0" y="190" width="500" height="130"/></clipPath>
       <filter id="reflBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
-      <!-- Black-background PNG: desaturate → apply skin color, use sum-of-channels as alpha so black=0, grey=opaque -->
+      <!-- Black-background PNG: alpha mask from luminance, then color-blend skin hue onto grey image -->
       <filter id="handSkinFilter" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
         <feColorMatrix type="saturate" values="0" result="grey"/>
-        <feColorMatrix id="handSkinMatrix" in="grey" type="matrix"
-          values="0 0 0 0 0.9098  0 0 0 0 0.7059  0 0 0 0 0.5412  1 1 1 0 0"/>
+        <feFlood id="handSkinFlood" flood-color="#e0ac69" result="tint"/>
+        <feBlend in="tint" in2="grey" mode="multiply" result="tinted"/>
+        <feComposite in="tinted" in2="SourceGraphic" operator="in"/>
+      </filter>
+      <!-- clips inner side of hand images so oar tip is visible past the hand -->
+      <clipPath id="clipHand">
+        <rect x="-15" y="-40" width="77" height="80"/>
+      </clipPath>
+      <!-- fabric texture for sleeves -->
+      <filter id="sleeveTexture" color-interpolation-filters="sRGB" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9 0.3" numOctaves="6" seed="2" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="grey"/>
+        <feComponentTransfer in="grey" result="subtle">
+          <feFuncR type="linear" slope="0.65" intercept="0.35"/>
+          <feFuncG type="linear" slope="0.65" intercept="0.35"/>
+          <feFuncB type="linear" slope="0.65" intercept="0.35"/>
+        </feComponentTransfer>
+        <feBlend in="SourceGraphic" in2="subtle" mode="multiply"/>
+        <feComposite in2="SourceGraphic" operator="in"/>
+      </filter>
+      <!-- wood-grain texture for oar shafts -->
+      <filter id="oarTexture" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.7" numOctaves="3" seed="5" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="grey"/>
+        <feComponentTransfer in="grey" result="grain">
+          <feFuncR type="linear" slope="0.5" intercept="0.5"/>
+          <feFuncG type="linear" slope="0.5" intercept="0.5"/>
+          <feFuncB type="linear" slope="0.5" intercept="0.5"/>
+        </feComponentTransfer>
+        <feBlend in="SourceGraphic" in2="grain" mode="multiply"/>
+        <feComposite in2="SourceGraphic" operator="in"/>
       </filter>
     </defs>
 
@@ -653,19 +699,16 @@
       <!-- boat bow, seen from inside looking forward -->
       <g id="boatHullGroup"></g>
 
-      <!-- rigger arms (behind shaft) -->
-      <line id="rigL_a" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
-      <line id="rigL_b" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
-      <line id="rigR_a" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
-      <line id="rigR_b" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+      <!-- rigger arms hidden -->
+      <line id="rigL_a" stroke="#6b7280" stroke-width="2" stroke-linecap="round" display="none"/>
+      <line id="rigL_b" stroke="#6b7280" stroke-width="2" stroke-linecap="round" display="none"/>
+      <line id="rigR_a" stroke="#6b7280" stroke-width="2" stroke-linecap="round" display="none"/>
+      <line id="rigR_b" stroke="#6b7280" stroke-width="2" stroke-linecap="round" display="none"/>
 
-      <!-- oar shafts -->
-      <line id="oarL" x1="90" y1="300" x2="10" y2="230" stroke="#7a4a1e" stroke-width="7" stroke-linecap="round"/>
-      <line id="oarR" x1="410" y1="300" x2="490" y2="230" stroke="#7a4a1e" stroke-width="7" stroke-linecap="round"/>
       <g id="oarBladeL"></g>
       <g id="oarBladeR"></g>
 
-      <!-- oarlock rings (on top of shaft) -->
+      <!-- oarlock rings -->
       <g id="lockL">
         <ellipse id="lockRingL" rx="9" ry="5" fill="#c0c4cc" stroke="#6b7280" stroke-width="2"/>
         <circle  id="lockDotL"  r="3"           fill="#6b7280"/>
@@ -675,17 +718,24 @@
         <circle  id="lockDotR"  r="3"           fill="#6b7280"/>
       </g>
 
-      <!-- forearms: hidden when using photorealistic hand images -->
-      <path id="forearmL" fill="#e8b48a" d="M 0 0" opacity="0"/>
-      <path id="forearmR" fill="#e8b48a" d="M 0 0" opacity="0"/>
+      <!-- oar shafts: filled tapered path (thick handle, thinner at blade) -->
+      <path id="oarL" fill="#7a4a1e" d="M 0 0" filter="url(#oarTexture)"/>
+      <path id="oarR" fill="#7a4a1e" d="M 0 0" filter="url(#oarTexture)"/>
 
-      <!-- hands: separate files for left and right, each 1086x724 scaled to 80x53 -->
+      <!-- hands: fist center aligned with oar handle end -->
       <g id="handL">
-        <image href="images/hands/hand_left.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
+        <!-- revert: <image href="images/hands/hand_left.png" x="-62" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/> -->
+        <g transform="scale(-1,1)">
+          <image href="images/hands/hand_right.png" x="-38" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/>
+        </g>
       </g>
       <g id="handR">
-        <image href="images/hands/hand_right.png" x="-40" y="-25" width="80" height="53" filter="url(#handSkinFilter)"/>
+        <image href="images/hands/hand_right.png" x="-38" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/>
       </g>
+
+      <!-- sleeves: drawn AFTER hands (on top) to hide the wrist transition -->
+      <path id="forearmL" fill="#1e3a8a" d="M 0 0" filter="url(#sleeveTexture)"/>
+      <path id="forearmR" fill="#1e3a8a" d="M 0 0" filter="url(#sleeveTexture)"/>
     </g>
   </svg>
 
@@ -740,6 +790,10 @@
       <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider-toggle"></span></label>
       <span data-i18n="sound_click_desc">clic en cada catch</span>
     </div>
+  </div>
+  <div class="sleeve-color-row">
+    <span class="sleeve-color-label" data-i18n="label_sleeve">Manga</span>
+    <div id="freeShirtColors"></div>
   </div>
   <button class="play-btn" id="playBtn">▶ Empezar</button>
   <button class="play-btn save-btn" id="manualSaveBtnFree" disabled>Rema 10:00 más para poder guardar</button>
@@ -895,6 +949,11 @@
   </div>
 
   <div class="custom-section">
+    <div class="custom-section-title" data-i18n="section_shirt">Color de manga</div>
+    <div class="skin-swatches" id="shirtSwatches"></div>
+  </div>
+
+  <div class="custom-section">
     <div class="custom-section-title"><span data-i18n="section_boat_shape">Forma del bote</span> <span class="unlock-hint" id="boatShapeUnlockHint"></span></div>
     <div class="item-gallery" id="boatShapeGallery"></div>
   </div>
@@ -1044,7 +1103,7 @@ const T = {
     btn_first_cta:'Comienza tu primer entrenamiento', btn_next_cta:'Empieza tu próximo entrenamiento',
     no_sessions_yet:'Aún no has entrenado nada — dale a "Empezar entrenamiento" para tu primera sesión.',
     stat_sessions:'Sesiones realizadas', stat_minutes:'Minutos remados', stat_best_streak:'Mejor racha (días)', stat_avg_spm:'Cadencia media (spm)',
-    label_pace:'Ritmo', label_ratio:'Relación', label_sound:'Sonido',
+    label_pace:'Ritmo', label_ratio:'Relación', label_sound:'Sonido', label_sleeve:'Manga',
     sound_click_desc:'clic en cada catch',
     btn_start:'▶ Empezar', btn_pause:'⏸ Pausar', btn_resume:'▶ Reanudar',
     btn_save_ready:'Guardar entrenamiento', btn_save_idle:'Rema 10:00 más para poder guardar',
@@ -1070,7 +1129,7 @@ const T = {
     stat_workouts:'Entrenamientos', stat_total_minutes:'Minutos totales', stat_total_distance:'Distancia total', stat_total_calories:'Calorías totales',
     weekly_minutes:'Minutos', weekly_distance:'Distancia', weekly_workouts:'Entrenamientos',
     cal_less:'Menos', cal_more:'Más',
-    section_skin:'Tono de piel', section_boat_shape:'Forma del bote', section_boat_color:'Color del bote',
+    section_skin:'Tono de piel', section_shirt:'Color de manga', section_boat_shape:'Forma del bote', section_boat_color:'Color del bote',
     section_oar_shape:'Forma del remo', section_oar_color:'Color del remo', section_oar_sound:'Sonido del remo',
     section_dev:'Modo de desarrollador',
     test_mode_off:'Modo de prueba: guardar tras solo 15s (en vez de 10 min)',
@@ -1163,7 +1222,7 @@ const T = {
     btn_first_cta:'Start your first training', btn_next_cta:'Start your next training',
     no_sessions_yet:'No training yet — hit "Start training" for your first session.',
     stat_sessions:'Sessions completed', stat_minutes:'Minutes rowed', stat_best_streak:'Best streak (days)', stat_avg_spm:'Average cadence (spm)',
-    label_pace:'Pace', label_ratio:'Ratio', label_sound:'Sound',
+    label_pace:'Pace', label_ratio:'Ratio', label_sound:'Sound', label_sleeve:'Sleeve',
     sound_click_desc:'click on each catch',
     btn_start:'▶ Start', btn_pause:'⏸ Pause', btn_resume:'▶ Resume',
     btn_save_ready:'Save workout', btn_save_idle:'Row 10:00 more to save',
@@ -1189,7 +1248,7 @@ const T = {
     stat_workouts:'Workouts', stat_total_minutes:'Total minutes', stat_total_distance:'Total distance', stat_total_calories:'Total calories',
     weekly_minutes:'Minutes', weekly_distance:'Distance', weekly_workouts:'Workouts',
     cal_less:'Less', cal_more:'More',
-    section_skin:'Skin tone', section_boat_shape:'Boat shape', section_boat_color:'Boat color',
+    section_skin:'Skin tone', section_shirt:'Sleeve color', section_boat_shape:'Boat shape', section_boat_color:'Boat color',
     section_oar_shape:'Oar shape', section_oar_color:'Oar color', section_oar_sound:'Oar sound',
     section_dev:'Developer mode',
     test_mode_off:'Test mode: save after just 15s (instead of 10 min)',
@@ -1617,10 +1676,10 @@ function setLang(l) {
     if (phase === 'DRIVE') pos = easeOutCubic(phaseProgress);
     else pos = 1 - easeInOutQuad(phaseProgress);
 
-    // Hands travel from far/high (catch) to close/low (finish), converging slightly toward center at finish
-    const farY = 258, closeY = 272;
-    const farXOffsetL = -68, closeXOffsetL = -50;
-    const farXOffsetR = 68, closeXOffsetR = 50;
+    // Hands move on Y axis only (toward viewer = down) — X stays fixed
+    const farY = 255, closeY = 278;
+    const farXOffsetL = -60, closeXOffsetL = -60;
+    const farXOffsetR = 60, closeXOffsetR = 60;
     const cx = 250;
     const handY = farY + pos * (closeY - farY);
     const handXL = cx + farXOffsetL + pos * (closeXOffsetL - farXOffsetL);
@@ -1629,8 +1688,38 @@ function setLang(l) {
 
     handL.setAttribute('transform', `translate(${handXL},${handY}) scale(${scale})`);
     handR.setAttribute('transform', `translate(${handXR},${handY}) scale(${scale})`);
-    forearmL.setAttribute('d', taperPath(175, 320, handXL, handY, 22, 14));
-    forearmR.setAttribute('d', taperPath(325, 320, handXR, handY, 22, 14));
+    // Left forearm — rounded top corners, moved up 2
+    {
+      const lx1=handXL-74,ly1=handY+65,lx2=handXL-33,ly2=handY+17;
+      const llen=Math.sqrt((lx2-lx1)**2+(ly2-ly1)**2)||1;
+      const lpx=-(ly2-ly1)/llen,lpy=(lx2-lx1)/llen,lb=25,lt=15.5;
+      const iB=[lx1+lpx*lb,ly1+lpy*lb],iT=[lx2+lpx*lt,ly2+lpy*lt];
+      const oT=[lx2-lpx*lt,ly2-lpy*lt],oB=[lx1-lpx*lb,ly1-lpy*lb];
+      const u=(handY+68-oT[1])/(oB[1]-oT[1]);
+      const oE=[oT[0]+u*(oB[0]-oT[0]),handY+68];
+      const r=6,n=(ax,ay)=>{const l=Math.sqrt(ax*ax+ay*ay)||1;return[ax/l,ay/l];};
+      const ds=n(iT[0]-iB[0],iT[1]-iB[1]),dt=n(oT[0]-iT[0],oT[1]-iT[1]),do_=n(oE[0]-oT[0],oE[1]-oT[1]);
+      const p1=[iT[0]-ds[0]*r,iT[1]-ds[1]*r],p2=[iT[0]+dt[0]*r,iT[1]+dt[1]*r];
+      const p3=[oT[0]-dt[0]*r,oT[1]-dt[1]*r],p4=[oT[0]+do_[0]*r,oT[1]+do_[1]*r];
+      const f=v=>v.toFixed(1);
+      forearmL.setAttribute('d',`M${f(iB[0])} ${f(iB[1])} L${f(p1[0])} ${f(p1[1])} Q${f(iT[0])} ${f(iT[1])} ${f(p2[0])} ${f(p2[1])} L${f(p3[0])} ${f(p3[1])} Q${f(oT[0])} ${f(oT[1])} ${f(p4[0])} ${f(p4[1])} L${f(oE[0])} ${f(oE[1])} Z`);
+    }
+    // Right forearm — rounded top corners, moved up 2
+    {
+      const rx1=handXR+72,ry1=handY+65,rx2=handXR+31,ry2=handY+17;
+      const rlen=Math.sqrt((rx2-rx1)**2+(ry2-ry1)**2)||1;
+      const rpx=-(ry2-ry1)/rlen,rpy=(rx2-rx1)/rlen,rb=24,rt=14.5;
+      const c1=[rx1+rpx*rb,ry1+rpy*rb],c2=[rx2+rpx*rt,ry2+rpy*rt];
+      const c3=[rx2-rpx*rt,ry2-rpy*rt],c4=[rx1-rpx*rb,ry1-rpy*rb];
+      const u=(handY+68-c2[1])/(c1[1]-c2[1]);
+      const c1e=[c2[0]+u*(c1[0]-c2[0]),handY+68];
+      const r=6,n=(ax,ay)=>{const l=Math.sqrt(ax*ax+ay*ay)||1;return[ax/l,ay/l];};
+      const ds=n(c2[0]-c1e[0],c2[1]-c1e[1]),dt=n(c3[0]-c2[0],c3[1]-c2[1]),do_=n(c4[0]-c3[0],c4[1]-c3[1]);
+      const p1=[c2[0]-ds[0]*r,c2[1]-ds[1]*r],p2=[c2[0]+dt[0]*r,c2[1]+dt[1]*r];
+      const p3=[c3[0]-dt[0]*r,c3[1]-dt[1]*r],p4=[c3[0]+do_[0]*r,c3[1]+do_[1]*r];
+      const f=v=>v.toFixed(1);
+      forearmR.setAttribute('d',`M${f(c1e[0])} ${f(c1e[1])} L${f(p1[0])} ${f(p1[1])} Q${f(c2[0])} ${f(c2[1])} ${f(p2[0])} ${f(p2[1])} L${f(p3[0])} ${f(p3[1])} Q${f(c3[0])} ${f(c3[1])} ${f(p4[0])} ${f(p4[1])} L${f(c4[0])} ${f(c4[1])} Z`);
+    }
 
     // Blade tracks with hand during DRIVE (stays flat as hand drops).
     // During RECOVERY blade barely clears the surface — oars look nearly horizontal.
@@ -1642,12 +1731,21 @@ function setLang(l) {
       bladeY = handY + 35 * Math.sin(phaseProgress * Math.PI);
       bladeOpacity = Math.min(1, phaseProgress * 8);
     }
-    const oarL_x1 = handXL - 10, oarL_y1 = handY - 5, oarL_x2 = handXL - 92, oarL_y2 = bladeY;
-    const oarR_x1 = handXR + 10, oarR_y1 = handY - 5, oarR_x2 = handXR + 92, oarR_y2 = bladeY;
-    oarL.setAttribute('x1', oarL_x1); oarL.setAttribute('y1', oarL_y1);
-    oarL.setAttribute('x2', oarL_x2); oarL.setAttribute('y2', oarL_y2);
-    oarR.setAttribute('x1', oarR_x1); oarR.setAttribute('y1', oarR_y1);
-    oarR.setAttribute('x2', oarR_x2); oarR.setAttribute('y2', oarR_y2);
+    const oarL_x1 = handXL - 10, oarL_y1 = handY - 7, oarL_x2 = handXL - 120, oarL_y2 = bladeY;
+    const oarR_x1 = handXR + 10, oarR_y1 = handY - 7, oarR_x2 = handXR + 120, oarR_y2 = bladeY;
+    // tapered oar shaft: wide at handle (wH), narrow at blade (wT)
+    {
+      const dx=oarL_x2-oarL_x1,dy=oarL_y2-oarL_y1,len=Math.sqrt(dx*dx+dy*dy)||1;
+      const px=-dy/len,py=dx/len,wH=8,wT=3;
+      const f=v=>v.toFixed(1);
+      oarL.setAttribute('d',`M${f(oarL_x1+px*wH)} ${f(oarL_y1+py*wH)} L${f(oarL_x2+px*wT)} ${f(oarL_y2+py*wT)} L${f(oarL_x2-px*wT)} ${f(oarL_y2-py*wT)} L${f(oarL_x1-px*wH)} ${f(oarL_y1-py*wH)} Z`);
+    }
+    {
+      const dx=oarR_x2-oarR_x1,dy=oarR_y2-oarR_y1,len=Math.sqrt(dx*dx+dy*dy)||1;
+      const px=-dy/len,py=dx/len,wH=8,wT=3;
+      const f=v=>v.toFixed(1);
+      oarR.setAttribute('d',`M${f(oarR_x1+px*wH)} ${f(oarR_y1+py*wH)} L${f(oarR_x2+px*wT)} ${f(oarR_y2+py*wT)} L${f(oarR_x2-px*wT)} ${f(oarR_y2-py*wT)} L${f(oarR_x1-px*wH)} ${f(oarR_y1-py*wH)} Z`);
+    }
     const angleL = Math.atan2(oarL_y2 - oarL_y1, oarL_x2 - oarL_x1) * 180 / Math.PI;
     const angleR = Math.atan2(oarR_y2 - oarR_y1, oarR_x2 - oarR_x1) * 180 / Math.PI;
     oarBladeL.setAttribute('transform', `translate(${oarL_x2},${oarL_y2}) rotate(${angleL})`);
@@ -3126,6 +3224,7 @@ function setLang(l) {
 
   // ---------- CUSTOMIZATION: skin tone + separate shape/color catalogs for boats and oars ----------
   const SKIN_TONES = ['#ffe0bd', '#f1c27d', '#e0ac69', '#c68642', '#8d5524', '#5c3a21'];
+  const SHIRT_COLORS = ['#1e3a8a', '#0f766e', '#7c3aed', '#be123c', '#1d4ed8', '#ea580c', '#166534', '#1e293b', '#ffffff', '#374151'];
 
   function getBoatShapes() {
     return [
@@ -3207,6 +3306,7 @@ function setLang(l) {
   let OAR_COLORS = getOarColors();
 
   let skinColor = SKIN_TONES[2];
+  let shirtColor = SHIRT_COLORS[0];
   let selectedBoatShapeId = 'classic', selectedBoatColorId = 'red';
   let selectedOarShapeId = 'spoon', selectedOarColorId = 'wood';
 
@@ -3220,14 +3320,30 @@ function setLang(l) {
 
   function applySkinColor(color) {
     skinColor = color;
-    const num = parseInt(color.slice(1), 16);
-    const r = ((num >> 16) / 255).toFixed(4);
-    const g = (((num >> 8) & 0xff) / 255).toFixed(4);
-    const b = ((num & 0xff) / 255).toFixed(4);
-    const mx = document.querySelector('#handSkinMatrix');
-    if (mx) mx.setAttribute('values', `0 0 0 0 ${r}  0 0 0 0 ${g}  0 0 0 0 ${b}  1 1 1 0 0`);
+    const flood = document.querySelector('#handSkinFlood');
+    if (flood) flood.setAttribute('flood-color', color);
+  }
+
+  function applyShirtColor(color) {
+    shirtColor = color;
     forearmL.setAttribute('fill', color);
     forearmR.setAttribute('fill', color);
+    renderFreeSleeveColors();
+  }
+
+  function renderFreeSleeveColors() {
+    const wrap = document.getElementById('freeShirtColors');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    SHIRT_COLORS.forEach(color => {
+      const btn = document.createElement('button');
+      btn.className = 'free-shirt-swatch' + (color === shirtColor ? ' selected' : '');
+      btn.style.background = color;
+      if (color === '#ffffff') btn.style.outline = '1px solid #ccc';
+      btn.title = color;
+      btn.addEventListener('click', () => { applyShirtColor(color); renderShirtSwatches(); savePreferences(); });
+      wrap.appendChild(btn);
+    });
   }
 
   function currentBoatShape() { return BOAT_SHAPES.find(s => s.id === selectedBoatShapeId) || BOAT_SHAPES[0]; }
@@ -3324,7 +3440,7 @@ function setLang(l) {
 
   async function savePreferences() {
     await storageSetWithRetry('preferences', JSON.stringify({
-      skinColor, selectedBoatShapeId, selectedBoatColorId, selectedOarShapeId, selectedOarColorId, soundStyle, isPremium
+      skinColor, shirtColor, selectedBoatShapeId, selectedBoatColorId, selectedOarShapeId, selectedOarColorId, soundStyle, isPremium
     }), false);
   }
   async function loadPreferences() {
@@ -3333,6 +3449,7 @@ function setLang(l) {
       if (res && res.value) {
         const prefs = JSON.parse(res.value);
         if (prefs.skinColor) skinColor = prefs.skinColor;
+        if (prefs.shirtColor) shirtColor = prefs.shirtColor;
         if (prefs.selectedBoatShapeId) selectedBoatShapeId = prefs.selectedBoatShapeId;
         if (prefs.selectedBoatColorId) selectedBoatColorId = prefs.selectedBoatColorId;
         if (prefs.selectedOarShapeId) selectedOarShapeId = prefs.selectedOarShapeId;
@@ -3343,6 +3460,7 @@ function setLang(l) {
     } catch (e) { /* no saved preferences yet */ }
     if (soundStyle === 'water' && !isPremium && !devUnlockAll) soundStyle = 'click'; // water sound is premium-only
     applySkinColor(skinColor);
+    applyShirtColor(shirtColor);
     applyBoatAppearance();
     applyOarAppearance();
   }
@@ -3430,6 +3548,21 @@ function setLang(l) {
     });
   }
 
+  function renderShirtSwatches() {
+    const wrap = document.getElementById('shirtSwatches');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    SHIRT_COLORS.forEach(color => {
+      const btn = document.createElement('button');
+      btn.className = 'skin-swatch' + (color === shirtColor ? ' selected' : '');
+      btn.style.background = color;
+      btn.style.border = color === '#ffffff' ? '1px solid #ccc' : '';
+      btn.title = color;
+      btn.addEventListener('click', () => { applyShirtColor(color); renderShirtSwatches(); savePreferences(); });
+      wrap.appendChild(btn);
+    });
+  }
+
   function renderShapeGallery(containerId, items, selectedId, unlockedCount, onSelect, previewFn, viewBox) {
     const wrap = document.getElementById(containerId);
     wrap.innerHTML = '';
@@ -3467,6 +3600,7 @@ function setLang(l) {
 
   async function renderCustomization() {
     renderSkinSwatches();
+    renderShirtSwatches();
     let hist = [];
     try { hist = await loadHistory(); } catch (e) { hist = []; }
     const playerLevel = computeLevelInfo(computeTotalXP(hist)).level;
