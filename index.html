@@ -193,6 +193,9 @@
   .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.2s linear; }
   .route-progress-track { width: 100%; height: 4px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 6px; }
   .route-progress-fill { height: 100%; background: #3a3a3a; width: 0%; transition: width 0.2s linear; }
+  .seg-nav-btn { background: none; border: none; padding: 0 2px; font-size: 18px; line-height: 1; color: var(--muted); cursor: pointer; flex-shrink: 0; opacity: 0.7; transition: opacity 0.15s; }
+  .seg-nav-btn:hover { opacity: 1; color: var(--text); }
+  .seg-nav-btn:disabled { opacity: 0.2; cursor: default; }
 
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -551,6 +554,7 @@
 <h1><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:5px;"><path d="M12 3v18"/><path d="M7 8l5-3 5 3"/><path d="M4 17c3 2 13 2 16 0"/></svg><span data-i18n="page_title">Metrónomo de Remo</span></h1>
 
 <button id="langToggleBtn" onclick="setLang(this.textContent.trim()==='EN'?'en':'es')" style="position:fixed;top:8px;right:10px;z-index:100;background:rgba(255,255,255,0.92);border:1px solid #eceef1;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:#4b5563;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);">EN</button>
+<button id="devTierBtn" onclick="toggleDevTier()" title="Alternar Free / Premium (solo pruebas)" style="position:fixed;top:8px;right:52px;z-index:100;background:#374151;color:#fff;border:none;border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;cursor:pointer;opacity:0.75;box-shadow:0 1px 4px rgba(0,0,0,0.15);">FREE</button>
 
 <div class="tabs">
   <button id="tabHome" class="active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:4px;"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h5v-5h2v5h5v-9"/></svg><span data-i18n="nav_home">Inicio</span></button>
@@ -708,12 +712,12 @@
       <g id="oarBladeL"></g>
       <g id="oarBladeR"></g>
 
-      <!-- oarlock rings -->
-      <g id="lockL">
+      <!-- oarlock rings (hidden — oars extend to screen edges) -->
+      <g id="lockL" display="none">
         <ellipse id="lockRingL" rx="9" ry="5" fill="#c0c4cc" stroke="#6b7280" stroke-width="2"/>
         <circle  id="lockDotL"  r="3"           fill="#6b7280"/>
       </g>
-      <g id="lockR">
+      <g id="lockR" display="none">
         <ellipse id="lockRingR" rx="9" ry="5" fill="#c0c4cc" stroke="#6b7280" stroke-width="2"/>
         <circle  id="lockDotR"  r="3"           fill="#6b7280"/>
       </g>
@@ -724,13 +728,24 @@
 
       <!-- hands: fist center aligned with oar handle end -->
       <g id="handL">
-        <!-- revert: <image href="images/hands/hand_left.png" x="-62" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/> -->
-        <g transform="scale(-1,1)">
+        <g id="handL_png"><g transform="scale(-1,1)">
           <image href="images/hands/hand_right.png" x="-38" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/>
-        </g>
+        </g></g>
+        <g id="handL_svg" style="display:none"><g transform="scale(-1,1)">
+          <polygon points="13,5 46,7 46,27 13,15" fill="#d4956a"/>
+          <rect x="-18" y="-14" width="36" height="27" rx="8" fill="#d4956a"/>
+          <rect x="14" y="-8" width="11" height="19" rx="5" fill="#d4956a"/>
+        </g></g>
       </g>
       <g id="handR">
-        <image href="images/hands/hand_right.png" x="-38" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/>
+        <g id="handR_png">
+          <image href="images/hands/hand_right.png" x="-38" y="-33" width="100" height="67" filter="url(#handSkinFilter)"/>
+        </g>
+        <g id="handR_svg" style="display:none">
+          <polygon points="13,5 46,7 46,27 13,15" fill="#d4956a"/>
+          <rect x="-18" y="-14" width="36" height="27" rx="8" fill="#d4956a"/>
+          <rect x="14" y="-8" width="11" height="19" rx="5" fill="#d4956a"/>
+        </g>
       </g>
 
       <!-- sleeves: drawn AFTER hands (on top) to hide the wrist transition -->
@@ -758,7 +773,11 @@
 
 <div class="segment-bar hidden" id="segmentBar">
   <div class="segment-info">
-    <span class="name" id="segName">—</span>
+    <div style="display:flex;align-items:center;gap:6px;min-width:0;">
+      <button id="segPrevBtn" class="seg-nav-btn" aria-label="Tramo anterior">‹</button>
+      <span class="name" id="segName">—</span>
+      <button id="segNextBtn" class="seg-nav-btn" aria-label="Tramo siguiente">›</button>
+    </div>
     <span id="segTime">0:00</span>
   </div>
   <div class="progress-track"><div class="progress-fill" id="segFill"></div></div>
@@ -1163,8 +1182,9 @@ const T = {
     seg_sprint_finish:'Sprint — línea de meta', seg_calm_down:'Vuelta a la calma', seg_straight:'Tramo recto',
     seg_bridge_curve:'Curva bajo el puente', seg_tight_curve:'Curva cerrada', seg_final_straight:'Recta final',
     seg_strong_start:'Salida fuerte', seg_settle:'Asentamiento', seg_final_lap:'Último tramo', seg_final_sprint:'Sprint final',
-    seg_start_notre_dame:'Salida junto a Notre-Dame', seg_tourist_boats:'Esquivando barcos turísticos',
-    seg_eiffel_straight:'Recta hacia la Torre Eiffel', seg_bridge_sprint:'Sprint bajo el puente',
+    seg_start_notre_dame:'Salida Notre Dame', seg_tourist_boats:'Esquivando Barcos turísticos',
+    seg_eiffel_straight:'Recta Eiffel', seg_bridge_sprint:'Sprint del puente',
+    seg_seine_cooldown:'Enfriamiento',
     seg_warmup:'Calentamiento', seg_long_piece:'Pieza larga — ritmo de carrera',
     seg_boathouse_sprint:'Sprint frente a Boathouse Row', seg_calm_start:'Salida en calma',
     seg_bay_swell:'Oleaje de la bahía', seg_ferry_wake:'Estela de los ferris',
@@ -1282,8 +1302,9 @@ const T = {
     seg_sprint_finish:'Sprint — finish line', seg_calm_down:'Ease off', seg_straight:'Straight',
     seg_bridge_curve:'Curve under the bridge', seg_tight_curve:'Tight curve', seg_final_straight:'Final straight',
     seg_strong_start:'Strong start', seg_settle:'Settle', seg_final_lap:'Last segment', seg_final_sprint:'Final sprint',
-    seg_start_notre_dame:'Start by Notre-Dame', seg_tourist_boats:'Dodging tourist boats',
-    seg_eiffel_straight:'Straight to the Eiffel Tower', seg_bridge_sprint:'Sprint under the bridge',
+    seg_start_notre_dame:'Notre Dame Start', seg_tourist_boats:'Dodging Tourist Boats',
+    seg_eiffel_straight:'Eiffel Straight', seg_bridge_sprint:'Bridge Sprint',
+    seg_seine_cooldown:'Cool-down',
     seg_warmup:'Warm-up', seg_long_piece:'Long piece — race pace',
     seg_boathouse_sprint:'Sprint past Boathouse Row', seg_calm_start:'Calm start',
     seg_bay_swell:'Harbour swell', seg_ferry_wake:'Ferry wake',
@@ -1377,7 +1398,7 @@ function setLang(l) {
   }
 
   let spm = 22, driveRatio = 2, playing = false, mode = 'home';
-  let devUnlockAll = true;
+  let devUnlockAll = false;
   let isPremium = false;
   let selectedBillingPeriod = 'monthly'; // 'monthly' | 'annual'
   let audioCtx = null, rafId = null, strokeStartTime = null, lastClickedStroke = -1, lastPhase = '', lastSubPhase = '';
@@ -1585,55 +1606,78 @@ function setLang(l) {
     updateBackgroundZoom(0);
     applyWeather(selectedWeather);
 
-    // Photo background per route. Tries {id}.jpg → {id}.png → SVG fallback.
-    // Weather variants: {id}_{weather}.jpg → {id}_{weather}.png → base photo.
+    // Photo background per route.
+    // Premium: tries {id}.jpg → {id}.png → segment image {id}_0.png → SVG fallback.
+    // Free: tries images/routes/Free/{id}.png → SVG fallback.
+    // Libre mode: always images/routes/libre.png.
     const imageEl = document.getElementById('bgPremiumImage');
-    const baseImgUrl = id === 'libre' ? 'images/routes/libre.png'
-      : (id && id !== 'default') ? `images/routes/${id}.jpg` : null;
-    const basePngUrl = (id && id !== 'default' && id !== 'libre') ? `images/routes/${id}.png` : null;
-    const weatherImgUrl = (id && id !== 'default' && id !== 'libre' && selectedWeather !== 'day') ? `images/routes/${id}_${selectedWeather}.jpg` : null;
-    const canUseImage = (id === 'libre' || isPremium || devUnlockAll) && baseImgUrl;
     const cloudGroupEl = document.getElementById('cloudGroup');
     const waterGroupEl = document.getElementById('illustratedWaterGroup');
     const sunGlowEl = document.getElementById('sunGlowCircle');
     const sunCoreEl = document.getElementById('sunCore');
     const mistGroupEl = document.getElementById('mistGroup');
+    const showImageMode = () => {
+      imageEl.setAttribute('opacity', '1'); bgFar.setAttribute('opacity', '0');
+      cloudGroupEl.style.display = 'none'; waterGroupEl.style.display = 'none';
+      sunGlowEl.style.display = 'none'; sunCoreEl.style.display = 'none'; mistGroupEl.style.display = 'none';
+    };
     const showSvgFallback = () => {
       imageEl.setAttribute('opacity', '0'); bgFar.setAttribute('opacity', '1');
       cloudGroupEl.style.display = ''; waterGroupEl.style.display = '';
       sunGlowEl.style.display = ''; sunCoreEl.style.display = ''; mistGroupEl.style.display = '';
     };
-    if (canUseImage) {
-      imageEl.onerror = () => {
-        const cur = imageEl.getAttribute('href');
-        if (weatherImgUrl && cur === weatherImgUrl) {
-          imageEl.setAttribute('href', baseImgUrl); // weather photo failed → try base
-        } else if (cur === baseImgUrl && basePngUrl) {
-          imageEl.setAttribute('href', basePngUrl); // .jpg failed → try .png
-        } else {
-          showSvgFallback(); // all attempts failed → SVG
-        }
+    const loadImage = (urls) => {
+      // Try each URL in order, fall back to SVG if all fail
+      const tryNext = (idx) => {
+        if (idx >= urls.length) { showSvgFallback(); return; }
+        const probe = new Image();
+        probe.onload = () => { imageEl.onerror = null; imageEl.setAttribute('href', urls[idx]); showImageMode(); };
+        probe.onerror = () => tryNext(idx + 1);
+        probe.src = urls[idx];
       };
-      imageEl.setAttribute('href', weatherImgUrl || baseImgUrl);
-      imageEl.setAttribute('opacity', '1');
-      bgFar.setAttribute('opacity', '0');
-      // The photo already has its own sky, water, and light — hide every illustrated layer so
-      // only the boat/oars/hands (drawn afterwards, on top) are overlaid on top of the real photo.
-      cloudGroupEl.style.display = 'none';
-      waterGroupEl.style.display = 'none';
-      sunGlowEl.style.display = 'none';
-      sunCoreEl.style.display = 'none';
-      mistGroupEl.style.display = 'none';
+      tryNext(0);
+    };
+
+    if (id === 'libre') {
+      loadImage(['images/routes/libre.png']);
+    } else if (id && id !== 'default') {
+      if (isPremium || devUnlockAll) {
+        const weatherUrl = (selectedWeather !== 'day') ? `images/routes/${id}_${selectedWeather}.jpg` : null;
+        const urls = [...(weatherUrl ? [weatherUrl] : []), `images/routes/${id}.jpg`, `images/routes/${id}_0.png`, `images/routes/Free/${id}.png`];
+        loadImage(urls);
+      } else {
+        loadImage([`images/routes/Free/${id}.png`]);
+      }
     } else {
-      imageEl.setAttribute('opacity', '0');
-      bgFar.setAttribute('opacity', '1');
-      cloudGroupEl.style.display = '';
-      waterGroupEl.style.display = '';
-      sunGlowEl.style.display = '';
-      sunCoreEl.style.display = '';
-      mistGroupEl.style.display = '';
+      showSvgFallback();
     }
+    applyTierVisuals();
   }
+  function applyTierVisuals() {
+    const premium = isPremium || devUnlockAll;
+    // Sleeve texture
+    forearmL.setAttribute('filter', premium ? 'url(#sleeveTexture)' : 'none');
+    forearmR.setAttribute('filter', premium ? 'url(#sleeveTexture)' : 'none');
+    // Oar texture
+    oarL.setAttribute('filter', premium ? 'url(#oarTexture)' : 'none');
+    oarR.setAttribute('filter', premium ? 'url(#oarTexture)' : 'none');
+    // Hands: PNG (premium) vs SVG fist (free)
+    const pngL = document.getElementById('handL_png'), svgL = document.getElementById('handL_svg');
+    const pngR = document.getElementById('handR_png'), svgR = document.getElementById('handR_svg');
+    if (pngL) pngL.style.display = premium ? '' : 'none';
+    if (svgL) svgL.style.display = premium ? 'none' : '';
+    if (pngR) pngR.style.display = premium ? '' : 'none';
+    if (svgR) svgR.style.display = premium ? 'none' : '';
+    // Dev button label
+    const devBtn = document.getElementById('devTierBtn');
+    if (devBtn) devBtn.textContent = (isPremium || devUnlockAll) ? 'PRO ✓' : 'FREE';
+  }
+  window.toggleDevTier = function() {
+    devUnlockAll = !devUnlockAll;
+    applyTierVisuals();
+    const routeId = selectedRoute ? selectedRoute.id : 'default';
+    setScenery(routeId, selectedWeather);
+  };
   setScenery('default');
 
   const THEMES = {
@@ -1690,7 +1734,7 @@ function setLang(l) {
     handR.setAttribute('transform', `translate(${handXR},${handY}) scale(${scale})`);
     // Left forearm — rounded top corners, moved up 2
     {
-      const lx1=handXL-74,ly1=handY+65,lx2=handXL-33,ly2=handY+17;
+      const lx1=handXL-76,ly1=handY+65,lx2=handXL-35,ly2=handY+17;
       const llen=Math.sqrt((lx2-lx1)**2+(ly2-ly1)**2)||1;
       const lpx=-(ly2-ly1)/llen,lpy=(lx2-lx1)/llen,lb=25,lt=15.5;
       const iB=[lx1+lpx*lb,ly1+lpy*lb],iT=[lx2+lpx*lt,ly2+lpy*lt];
@@ -1721,37 +1765,40 @@ function setLang(l) {
       forearmR.setAttribute('d',`M${f(c1e[0])} ${f(c1e[1])} L${f(p1[0])} ${f(p1[1])} Q${f(c2[0])} ${f(c2[1])} ${f(p2[0])} ${f(p2[1])} L${f(p3[0])} ${f(p3[1])} Q${f(c3[0])} ${f(c3[1])} ${f(p4[0])} ${f(p4[1])} L${f(c4[0])} ${f(c4[1])} Z`);
     }
 
-    // Blade tracks with hand during DRIVE (stays flat as hand drops).
-    // During RECOVERY blade barely clears the surface — oars look nearly horizontal.
-    let bladeY, bladeOpacity;
+    // Oar angle driven by bladeY physics (same as before); shafts now extend to screen edges.
+    let bladeY;
     if (phase === 'DRIVE') {
       bladeY = handY;
-      bladeOpacity = Math.max(0, 1 - phaseProgress * 5);
     } else {
       bladeY = handY + 35 * Math.sin(phaseProgress * Math.PI);
-      bladeOpacity = Math.min(1, phaseProgress * 8);
     }
-    const oarL_x1 = handXL - 10, oarL_y1 = handY - 7, oarL_x2 = handXL - 120, oarL_y2 = bladeY;
-    const oarR_x1 = handXR + 10, oarR_y1 = handY - 7, oarR_x2 = handXR + 120, oarR_y2 = bladeY;
-    // tapered oar shaft: wide at handle (wH), narrow at blade (wT)
+    // Virtual blade point (sets direction / oarlock position, not rendered)
+    const oarL_x1 = handXL - 10, oarL_y1 = handY - 7;
+    const oarL_vx2 = handXL - 120, oarL_vy2 = bladeY;
+    const oarR_x1 = handXR + 10, oarR_y1 = handY - 7;
+    const oarR_vx2 = handXR + 120, oarR_vy2 = bladeY;
+    // Extrapolate to screen edges (x=-10 left, x=510 right)
+    const tL = (-10 - oarL_x1) / (oarL_vx2 - oarL_x1);
+    const oarL_x2 = -10, oarL_y2 = oarL_y1 + tL * (oarL_vy2 - oarL_y1);
+    const tR = (510 - oarR_x1) / (oarR_vx2 - oarR_x1);
+    const oarR_x2 = 510, oarR_y2 = oarR_y1 + tR * (oarR_vy2 - oarR_y1);
+    // tapered oar shaft: wide at handle (wH), narrow at tip (wT)
     {
       const dx=oarL_x2-oarL_x1,dy=oarL_y2-oarL_y1,len=Math.sqrt(dx*dx+dy*dy)||1;
-      const px=-dy/len,py=dx/len,wH=8,wT=3;
+      const px=-dy/len,py=dx/len,wH=8,wT=2;
       const f=v=>v.toFixed(1);
       oarL.setAttribute('d',`M${f(oarL_x1+px*wH)} ${f(oarL_y1+py*wH)} L${f(oarL_x2+px*wT)} ${f(oarL_y2+py*wT)} L${f(oarL_x2-px*wT)} ${f(oarL_y2-py*wT)} L${f(oarL_x1-px*wH)} ${f(oarL_y1-py*wH)} Z`);
     }
     {
       const dx=oarR_x2-oarR_x1,dy=oarR_y2-oarR_y1,len=Math.sqrt(dx*dx+dy*dy)||1;
-      const px=-dy/len,py=dx/len,wH=8,wT=3;
+      const px=-dy/len,py=dx/len,wH=8,wT=2;
       const f=v=>v.toFixed(1);
       oarR.setAttribute('d',`M${f(oarR_x1+px*wH)} ${f(oarR_y1+py*wH)} L${f(oarR_x2+px*wT)} ${f(oarR_y2+py*wT)} L${f(oarR_x2-px*wT)} ${f(oarR_y2-py*wT)} L${f(oarR_x1-px*wH)} ${f(oarR_y1-py*wH)} Z`);
     }
-    const angleL = Math.atan2(oarL_y2 - oarL_y1, oarL_x2 - oarL_x1) * 180 / Math.PI;
-    const angleR = Math.atan2(oarR_y2 - oarR_y1, oarR_x2 - oarR_x1) * 180 / Math.PI;
-    oarBladeL.setAttribute('transform', `translate(${oarL_x2},${oarL_y2}) rotate(${angleL})`);
-    oarBladeR.setAttribute('transform', `translate(${oarR_x2},${oarR_y2}) rotate(${angleR})`);
-    oarBladeL.style.opacity = bladeOpacity;
-    oarBladeR.style.opacity = bladeOpacity;
+    const angleL = Math.atan2(oarL_vy2 - oarL_y1, oarL_vx2 - oarL_x1) * 180 / Math.PI;
+    const angleR = Math.atan2(oarR_vy2 - oarR_y1, oarR_vx2 - oarR_x1) * 180 / Math.PI;
+    oarBladeL.style.display = 'none';
+    oarBladeR.style.display = 'none';
 
     // Oarlock rings: follow shaft at 30% from blade toward hand
     const LF = 0.30;
@@ -2053,7 +2100,7 @@ function setLang(l) {
       { id: 'lucerne', name: t('route_lucerne_name'), sub: t('route_lucerne_sub'), desc: t('route_lucerne_desc'), premium: true,
         segments: [ {name:t('seg_strong_start'),spm:32,duration:30,theme:'accel'}, {name:t('seg_settle'),spm:24,duration:480,theme:'moderate'}, {name:t('seg_final_lap'),spm:28,duration:90,theme:'accel'}, {name:t('seg_final_sprint'),spm:34,duration:30,theme:'rapids'} ] },
       { id: 'seine', name: t('route_seine_name'), sub: t('route_seine_sub'), desc: t('route_seine_desc'), premium: true,
-        segments: [ {name:t('seg_start_notre_dame'),spm:18,duration:60,theme:'calm'}, {name:t('seg_tourist_boats'),spm:23,duration:180,theme:'moderate'}, {name:t('seg_eiffel_straight'),spm:27,duration:180,theme:'accel'}, {name:t('seg_bridge_sprint'),spm:30,duration:90,theme:'rapids'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
+        segments: [ {name:t('seg_start_notre_dame'),spm:18,duration:60,theme:'calm'}, {name:t('seg_tourist_boats'),spm:23,duration:180,theme:'moderate'}, {name:t('seg_bridge_sprint'),spm:30,duration:90,theme:'rapids'}, {name:t('seg_eiffel_straight'),spm:27,duration:180,theme:'accel'}, {name:t('seg_seine_cooldown'),spm:16,duration:120,theme:'calm'} ] },
       { id: 'schuylkill', name: t('route_schuylkill_name'), sub: t('route_schuylkill_sub'), desc: t('route_schuylkill_desc'), premium: true,
         segments: [ {name:t('seg_warmup'),spm:18,duration:120,theme:'calm'}, {name:t('seg_long_piece'),spm:24,duration:600,theme:'moderate'}, {name:t('seg_boathouse_sprint'),spm:30,duration:60,theme:'accel'}, {name:t('seg_cooldown'),spm:16,duration:120,theme:'calm'} ] },
       { id: 'sydney', name: t('route_sydney_name'), sub: t('route_sydney_sub'), desc: t('route_sydney_desc'), premium: true,
@@ -2414,22 +2461,52 @@ function setLang(l) {
     clearTimeout(spmToastTimeout);
     spmToastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
   }
+  let _segImgToken = 0;
   function updateSegmentImage(routeId, segIdx) {
+    if (!isPremium && !devUnlockAll) return;
     const imageEl = document.getElementById('bgPremiumImage');
-    if (!imageEl || imageEl.getAttribute('opacity') !== '1') return;
+    if (!imageEl) return;
+    const token = ++_segImgToken;
     const segUrl = `images/routes/${routeId}_${segIdx}.png`;
-    imageEl.onerror = () => {
+    const probe = new Image();
+    probe.onload = () => {
+      if (token !== _segImgToken) return; // stale probe — a newer one won
       imageEl.onerror = null;
-      imageEl.setAttribute('href', `images/routes/${routeId}.png`);
+      imageEl.setAttribute('href', segUrl);
+      imageEl.setAttribute('opacity', '1');
+      bgFar.setAttribute('opacity', '0');
+      ['cloudGroup','illustratedWaterGroup','sunGlowCircle','sunCore','mistGroup'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.style.display = 'none';
+      });
     };
-    imageEl.setAttribute('href', segUrl);
+    probe.onerror = () => { /* sin imagen de tramo — mantener display actual */ };
+    probe.src = segUrl;
   }
 
   function applySegment(seg) {
     if (seg.spm !== spm) showSpmChangeToast(seg.spm, spm);
     spm = seg.spm; setSceneTheme(seg.theme);
     updateSegmentImage(selectedRoute.id, currentSegIndex);
+    updateSegmentNavButtons();
   }
+  function updateSegmentNavButtons() {
+    const prev = document.getElementById('segPrevBtn'), next = document.getElementById('segNextBtn');
+    if (!prev || !next) return;
+    prev.disabled = currentSegIndex <= 0;
+    next.disabled = currentSegIndex >= selectedRoute.segments.length - 1;
+  }
+  function jumpToSegment(dir) {
+    const newIdx = currentSegIndex + dir;
+    if (newIdx < 0 || newIdx >= selectedRoute.segments.length) return;
+    routineElapsedBeforeSeg = selectedRoute.segments.slice(0, newIdx).reduce((a,s) => a + s.duration, 0);
+    currentSegIndex = newIdx;
+    segStartTime = null;
+    pausedSegElapsedSec = 0;
+    resumeOffsetMs = 0;
+    applySegment(selectedRoute.segments[currentSegIndex]);
+  }
+  document.getElementById('segPrevBtn').addEventListener('click', () => jumpToSegment(-1));
+  document.getElementById('segNextBtn').addEventListener('click', () => jumpToSegment(1));
 
   // ---------- MINIMUM-TIME SAVE SYSTEM ----------
   let MIN_SAVE_SECONDS = 600; // 10 minutes (toggle below can drop this to 15s for testing)
